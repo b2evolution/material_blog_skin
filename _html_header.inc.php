@@ -24,12 +24,11 @@ $params = array_merge( array(
 ), $params );
 
 // fp> I am removing this because it forces all skins to include a style.css file which we don't necessarily want.
-//require_css( 'style.css', 'relative' );
+// require_css( 'style.css', 'relative' );
 
 // The following is temporary and should be moved to some SiteSkin class
 siteskin_init();
 
-add_js_for_toolbar( 'blog' );		// Registers all the javascripts needed by the toolbar menu
 init_bubbletip_js( 'blog', $Skin->get_template( 'tooltip_plugin' ) ); // Add jQuery bubbletip plugin
 require_js( 'ajax.js', 'blog' );	// Functions to work with AJAX response data
 // CSS for IE9. NOTE: Don't use php checking here because of page caching!
@@ -59,11 +58,6 @@ echo $params['html_tag'];
 		request_title( $params );
 		// ------------------------------ END OF REQUEST TITLE -----------------------------
 	?></title>
-    
-    
-    
-       <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-
 	<?php skin_description_tag(); ?>
 	<?php skin_keywords_tag(); ?>
 	<?php skin_opengraph_tags(); ?>
@@ -92,19 +86,15 @@ echo $params['html_tag'];
 	}
 	?>
 	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="<?php echo $Blog->disp( 'rsd_url', 'raw' ) ?>" />
-	
+	<?php include_headlines() /* Add javascript and css files included by plugins and skin */ ?>
 	<?php
 		$Blog->disp( 'blog_css', 'raw');
 		$Blog->disp( 'user_css', 'raw');
 		$Blog->disp_setting( 'head_includes', 'raw');
 	?>
-        
-       
-       <?php include_headlines() /* Add javascript and css files included by plugins and skin */ ?> 
 </head>
 
-<body <?php skin_body_attrs( array( 'class' => $params['body_class'] ) ); ?>>
-    
+<body<?php skin_body_attrs( array( 'class' => $params['body_class'] ) ); ?>>
 
 <?php
 // ---------------------------- TOOLBAR INCLUDED HERE ----------------------------

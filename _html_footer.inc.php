@@ -14,10 +14,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 ?>
 <!-- End of skin_wrapper -->
 </div>
-
  <script type='text/javascript' src='mainscript.js'></script>
-
-
 <?php
 	modules_call_method( 'SkinEndHtmlBody' );
 
@@ -26,6 +23,5 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 
 	$Blog->disp_setting( 'footer_includes', 'raw' );
 ?>
-
 </body>
 </html>

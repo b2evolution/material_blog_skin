@@ -42,9 +42,13 @@ $('.circle-svg-a a, .circle-svg-span span').on("click", function(e) {
  
  $('.panel-group .panel').each(function(){
      panel_id++;
+     
      $(this).find('.panel-toggle').attr('data-target', '.pcollapse-'+panel_id);
     
+     $(this).find('.panel-toggle').addClass(' collapsed');
+    
      $(this).find('.panel-collapse').addClass(' pcollapse-'+panel_id);
+     
      
      if( $(this).find('.panel-heading').length > 0 ) {
          
