@@ -132,12 +132,12 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 			) );
 	?>
 
-	<div class="small">
+	<div class="small meta_footer">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(
 							'type' => 'comments',
-							'link_before' => '<span><i class="fa fa-comment"></i>',
+							'link_before' => '<span><i class="fa fa-comments-o"></i>',
 							'link_after' => '</span>',
 							'link_text_zero' => '#',
 							'link_text_one' => '#',

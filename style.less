@@ -15,7 +15,7 @@ and open the template in the editor.
 
 @textcolor: #212121;
 
-@divider: #B6B6B6;
+@divider: #E7E7E7;
 
 @linkcolor: #F4F4F4;
 
@@ -196,8 +196,18 @@ input[type="submit"],
 .content h6 {
     font-size: 0.8em;
     letter-spacing: 1px;
-    margin-bottom: 20px;
 }
+
+.content h1,
+.content h2,
+.content h3,
+.content h4,
+.content h5,
+.content h6 {
+    margin: 20px 0 20px;
+    line-height: 120%;
+}
+
 
 .content blockquote {
     background: #F9F9F9;
@@ -358,6 +368,14 @@ big {
 }
 
 
+.main #styled_content_block img {
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    -ms-border-radius: 0px;
+    -o-border-radius: 0px;
+    border-radius: 0px;
+}
+
 
 .main {
 
@@ -438,7 +456,7 @@ big {
         font-weight: 500;
         font-size: 1em;
         color: @primarycolor;
-        margin: 1em 0;
+        margin: 1em 0 0;
         background: transparent;
         outline: 0;
         letter-spacing: 0.6px;
@@ -602,7 +620,7 @@ svg {
 
 .post {
     background: #fff;
-    padding: 0em 0 2em;
+    padding: 0em;
     margin-right: 2em;
     border-radius: 0px;
     margin-bottom: 2em;
@@ -648,6 +666,7 @@ svg {
     >span {
         display: inline-block;
         margin-right: .6em;
+        margin-bottom: .6em;
         padding: .6em;
         border-radius: 2px;
         background: @linkcolor;
@@ -670,12 +689,43 @@ svg {
     }
 }
 
+.meta_footer {
+    margin-bottom: 1em;
+}
+
 
 .user, user.anonymous {
-    font-weight: 500;
+    font-weight: 400;
     word-wrap: break-word;
 }
 
+
+.main .bMore {
+    color: @textcolor;
+
+    a {
+        cursor: pointer;
+        padding: 14px 16px;
+        display: inline-block;
+        text-transform: uppercase;
+        font-weight: 500;
+        font-size: 1em;
+        color: @primarycolor;
+        margin: 0em 0;
+        background: 0 0;
+        outline: 0;
+        letter-spacing: .6px;
+        border: 0;
+        border-radius: 0;
+
+
+    }
+    a:hover{
+        background: @linkcolor;
+    }
+
+
+}
 
 
 
@@ -696,13 +746,20 @@ svg {
 
 
     .input-group {
+        width: 100%;
+        position: relative;
+        display: inline-block;
 
-        input {
-            width: 100%;
+        >span {
+
+        }
+
+        input[type="text"] {
+            width: 65%;
         }
         input[type="submit"] {
             margin: 0em;
-            margin-left: 0.6em;
+            margin: 2px 0 0 .6em;
         }
 
         .input-group-addon, .input-group-btn {
@@ -750,6 +807,8 @@ svg {
 
         i {
             line-height: 0; 
+            position: relative;
+            float: left;
         }
     }
 
@@ -808,7 +867,7 @@ svg {
     border: 0;
     border-radius: 0;
     border-bottom: 1px solid @divider;
-    padding: 2em 0;
+    padding: 2em 0 1em;
 
     .panel-heading {
         background: transparent;
@@ -829,6 +888,7 @@ svg {
             margin-top: -2.6em;
             border-radius: 50% !important;
             overflow: hidden;
+            padding: 0;
         }
 
         p {
@@ -876,6 +936,7 @@ svg {
     border: 0;
     border-radius: 0;
     margin-top: 4em;
+    margint-bottom: 0;
 
     form {
         margin: 0;
@@ -917,6 +978,7 @@ svg {
             border: 0;
             box-shadow: 0 0 0;
             border-radius: 0;
+            margin: 0;
         }
 
 
@@ -1111,7 +1173,18 @@ svg {
 
 /* Responsive */
 
+@media (max-width: 900px) {
+    .widget--social-media-links {
+        margin-top: 0px; 
+    }
+}
+
+
 @media (max-width: 600px) {
+
+    body {
+        font-size: 17px;
+    }
 
     .main .nav>li {
         width: 100%;
@@ -1121,5 +1194,11 @@ svg {
     .main .nav > li a {
         padding: 16px 20px;
     }
+
+    .widget--social-media-links {
+        text-align: left;
+        margin-bottom: 15px;
+    }
+
 
 }

@@ -50,6 +50,7 @@ echo $params['html_tag'];
 			echo $params['viewport_tag'];
 		}
 	?>
+    
 	<?php skin_content_meta(); /* Charset for static pages */ ?>
 	<?php skin_base_tag(); /* Base URL for this skin. You need this to fix relative links! */ ?>
 	<?php $Plugins->trigger_event( 'SkinBeginHtmlHead' ); ?>
@@ -58,6 +59,7 @@ echo $params['html_tag'];
 		request_title( $params );
 		// ------------------------------ END OF REQUEST TITLE -----------------------------
 	?></title>
+    
 	<?php skin_description_tag(); ?>
 	<?php skin_keywords_tag(); ?>
 	<?php skin_opengraph_tags(); ?>
