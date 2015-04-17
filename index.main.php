@@ -43,8 +43,25 @@ siteskin_include('_site_body_header.inc.php');
 
     <div class="container">
         <div class="masterhead">
-             <div class="row">
-                <div class="coll-xs-12 coll-sm-12 col-md-4 col-md-push-8">
+            <div class="row">
+
+                <div class="coll-xs-12 col-sm-12 col-md-8">
+                    <div class="pageHeader">
+                        <?php
+// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
+// Display container and contents:
+                        skin_container(NT_('Header'), array(
+                            // The following params will be used as defaults for widgets included in this container:
+                            'block_start' => '<div class="widget $wi_class$">',
+                            'block_end' => '</div>',
+                            'block_title_start' => '<h1 class="headtitle">',
+                            'block_title_end' => '</h1>',
+                        ));
+// ----------------------------- END OF "Header" CONTAINER -----------------------------
+                        ?>
+                    </div>
+                </div>
+                <div class="coll-xs-12 coll-sm-12 col-md-4">
                     <div class="PageTop">
                         <?php
 // ------------------------- "Page Top" CONTAINER EMBEDDED HERE --------------------------
@@ -60,22 +77,6 @@ siteskin_include('_site_body_header.inc.php');
                             'item_end' => '</li>',
                         ));
 // ----------------------------- END OF "Page Top" CONTAINER -----------------------------
-                        ?>
-                    </div>
-                </div>
-                <div class="coll-xs-12 col-sm-12 col-md-8 col-md-pull-4">
-                    <div class="pageHeader">
-                        <?php
-// ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
-// Display container and contents:
-                        skin_container(NT_('Header'), array(
-                            // The following params will be used as defaults for widgets included in this container:
-                            'block_start' => '<div class="widget $wi_class$">',
-                            'block_end' => '</div>',
-                            'block_title_start' => '<h1 class="headtitle">',
-                            'block_title_end' => '</h1>',
-                        ));
-// ----------------------------- END OF "Header" CONTAINER -----------------------------
                         ?>
                     </div>
                 </div>
@@ -194,6 +195,7 @@ siteskin_include('_site_body_header.inc.php');
                         skin_include('_item_block.inc.php', array(
                             'content_mode' => 'auto', // 'auto' will auto select depending on $disp-detail
                             // Comment template
+                            
                             'comment_start' => '<div class="panel panel-default comment">',
                             'comment_end' => '</div>',
                             'comment_title_before' => '<div class="panel-heading">',

@@ -80,6 +80,10 @@ ul {
     list-style: none;
 }
 
+ul li ul {
+    margin-left: 1em;
+}
+
 table { /* tables still need 'cellspacing="0"' in the markup */
     border-collapse: separate;
     border-spacing: 0;
@@ -206,6 +210,7 @@ input[type="submit"],
 .content h6 {
     margin: 20px 0 20px;
     line-height: 120%;
+    color: #444;
 }
 
 
@@ -282,7 +287,7 @@ input[type="submit"],
 }
 
 p {
-    margin-bottom: 1.5em;
+    margin-bottom: .8em;
 }
 
 b,
@@ -644,7 +649,7 @@ svg {
     -ms-word-wrap: break-word;
     word-wrap: break-word;
     margin-top: 0;
-    margin-bottom: 0.3em;
+    margin-bottom: 0.4em;
 
     a {
         color: @primarycolor;
@@ -689,6 +694,10 @@ svg {
     }
 }
 
+.meta {
+    margin-bottom: .4em;
+}
+
 .meta_footer {
     margin-bottom: 1em;
 }
@@ -729,7 +738,30 @@ svg {
 
 
 
+.content ul {
+   
+    li {
+        margin: 0;
+        padding: 0.8em 0;
+        border-bottom: 1px solid @divider;
+    }
+    li:last-child {
+        border: 0;
+    }
 
+    li ul {
+        border-top: 1px solid @divider;
+        margin-top: 0.8em;
+        margin-left: 0;
+        padding-left: 2em;
+    }
+
+    li ul li:last-child {
+        border: 0;
+        padding: 0.8em 0 0;
+    }
+
+}
 
 /* Sidebar / Panels */
 
@@ -749,13 +781,14 @@ svg {
         width: 100%;
         position: relative;
         display: inline-block;
+        padding-right: 3.6em;
 
         >span {
 
         }
 
         input[type="text"] {
-            width: 65%;
+            width: 100%;
         }
         input[type="submit"] {
             margin: 0em;
@@ -766,7 +799,35 @@ svg {
             width: auto;
             padding: 0;
             font-size: 1em;
+            position: absolute;
+            right: 0;
         }
+    }
+
+    ul {
+        margin-left: 0;
+    }
+
+    li {
+        margin: 0;
+        padding: 0.6em 0;
+        border-bottom: 1px solid @divider;
+        list-style: none;
+    }
+    li:last-child {
+        border: 0;
+    }
+
+    li ul {
+        border-top: 1px solid @divider;
+        margin-top: 0.6em;
+        margin-left: 0;
+        padding-left: 2em;
+    }
+
+    li ul li:last-child {
+        border: 0;
+        padding: 0.6em 0 0;
     }
 
 
@@ -1083,14 +1144,13 @@ svg {
 .alert-dismissable .close, .alert-dismissible .close {
     position: relative;
     top: 0;
-    right: -18px;
+    right: -28px;
     color: inherit;
     display: block;
     margin: 0;
-    padding: 2px;
-    background: transparent;
-    font-size: 1.1em;
-    line-height: 1.1em;
+    background: 0 0;
+    font-size: 1.6em;
+    line-height: 0;
 }
 
 .alert-success {
@@ -1173,9 +1233,10 @@ svg {
 
 /* Responsive */
 
-@media (max-width: 900px) {
+@media (max-width: 990px) {
     .widget--social-media-links {
         margin-top: 0px; 
+        margin-bottom: -1em;
     }
 }
 
@@ -1197,7 +1258,8 @@ svg {
 
     .widget--social-media-links {
         text-align: left;
-        margin-bottom: 15px;
+        margin-top: 15px;
+        
     }
 
 
