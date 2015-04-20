@@ -195,17 +195,18 @@ siteskin_include('_site_body_header.inc.php');
                         skin_include('_item_block.inc.php', array(
                             'content_mode' => 'auto', // 'auto' will auto select depending on $disp-detail
                             // Comment template
-                            
-                            'comment_start' => '<div class="panel panel-default comment">',
+                            'comment_start' => '<div class="evoComment panel panel-default">',
                             'comment_end' => '</div>',
-                            'comment_title_before' => '<div class="panel-heading">',
-                            'comment_title_after' => '',
-                            'comment_rating_before' => '<div class="comment_rating floatright">',
+                            'comment_title_before' => '<div class="panel-heading"><h4 class="evoComment-title panel-title">',
+                            'comment_title_after' => '</h4></div><div class="panel-body">',
+                            'comment_avatar_before' => '<div class="evoComment-avatar">',
+                            'comment_avatar_after' => '</div>',
+                            'comment_rating_before' => '<div class="evoComment-rating">',
                             'comment_rating_after' => '</div>',
-                            'comment_text_before' => '</div><div class="panel-body">',
-                            'comment_text_after' => '',
-                            'comment_info_before' => '<div class="bCommentSmallPrint">',
-                            'comment_info_after' => '</div></div>',
+                            'comment_text_before' => '<div class="evoComment-text">',
+                            'comment_text_after' => '</div>',
+                            'comment_info_before' => '<div class="evoComment-info clear text-muted"><small>',
+                            'comment_info_after' => '</small></div></div>',
                             'preview_start' => '<div class="panel panel-warning" id="comment_preview">',
                             'preview_end' => '</div>',
                             'comment_attach_info' => get_icon('help', 'imgtag', array(
@@ -244,93 +245,100 @@ siteskin_include('_site_body_header.inc.php');
 
                 <?php
                 // -------------- MAIN CONTENT TEMPLATE INCLUDED HERE (Based on $disp) --------------
-                skin_include('$disp$', array(
-                    'disp_posts' => '', // We already handled this case above
-                    'disp_single' => '', // We already handled this case above
-                    'disp_page' => '', // We already handled this case above
-                    'skin_form_params' => $Skin->get_template('Form'),
-                    'author_link_text' => 'preferredname',
-                    'profile_tabs' => array(
-                        'block_start' => '<ul class="nav nav-tabs profile_tabs">',
-                        'item_start' => '<li>',
-                        'item_end' => '</li>',
-                        'item_selected_start' => '<li class="active">',
-                        'item_selected_end' => '</li>',
-                        'block_end' => '</ul>',
-                    ),
-                    'pagination' => array(
-                        'block_start' => '<div class="center"><ul class="pagination">',
-                        'block_end' => '</ul></div>',
-                        'page_current_template' => '<span><b>$page_num$</b></span>',
-                        'page_item_before' => '<li>',
-                        'page_item_after' => '</li>',
-                        'prev_text' => '&lt;&lt;',
-                        'next_text' => '&gt;&gt;',
-                    ),
-                    // Form params for the forms below: login, register, lostpassword, activateinfo and msgform
-                    'skin_form_before' => '<div class="panel panel-default skin-form">'
-                    . '<div class="panel-heading">'
-                    . '<h3 class="panel-title">$form_title$</h3>'
-                    . '</div>'
-                    . '<div class="panel-body">',
-                    'skin_form_after' => '</div></div>',
-                    // Login
-                    'display_form_messages' => true,
-                    'form_title_login' => T_('Log in to your account') . '$form_links$',
-                    'form_class_login' => 'wrap-form-login',
-                    'form_title_lostpass' => get_request_title() . '$form_links$',
-                    'form_class_lostpass' => 'wrap-form-lostpass',
-                    'login_form_inskin' => false,
-                    'login_page_before' => '<div class="$form_class$">',
-                    'login_page_after' => '</div>',
-                    'login_form_class' => 'form-login',
-                    'display_reg_link' => true,
-                    'abort_link_position' => 'form_title',
-                    'abort_link_text' => '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
-                    // Register
-                    'register_page_before' => '<div class="wrap-form-register">',
-                    'register_page_after' => '</div>',
-                    'register_form_title' => T_('Register'),
-                    'register_form_class' => 'form-register',
-                    'register_links_attrs' => '',
-                    'register_use_placeholders' => true,
-                    'register_field_width' => 252,
-                    'register_disabled_page_before' => '<div class="wrap-form-register register-disabled">',
-                    'register_disabled_page_after' => '</div>',
-                    // Activate form
-                    'activate_form_title' => T_('Account activation'),
-                    'activate_page_before' => '<div class="wrap-form-activation">',
-                    'activate_page_after' => '</div>',
-                    // Profile
-                    'profile_avatar_before' => '<div class="panel panel-default profile_avatar">',
-                    'profile_avatar_after' => '</div>',
-                    // Search
-                    'search_input_before' => '<div class="input-group">',
-                    'search_input_after' => '',
-                    'search_submit_before' => '<span class="input-group-btn">',
-                    'search_submit_after' => '</span></div>',
-                    // Comment template
-                    'comment_avatar_position' => 'before_text',
-                    'comment_start' => '<div class="panel panel-default">',
-                    'comment_end' => '</div>',
-                    'comment_post_before' => '<div class="panel-heading"><h4 class="bTitle floatleft">',
-                    'comment_post_after' => '</h4>',
-                    'comment_title_before' => '<div class="floatright">',
-                    'comment_title_after' => '</div><div class="clear"></div></div><div class="panel-body">',
-                    'comment_rating_before' => '<div class="comment_rating floatright">',
-                    'comment_rating_after' => '</div>',
-                    'comment_text_before' => '',
-                    'comment_text_after' => '',
-                    'comment_info_before' => '<div class="bCommentSmallPrint">',
-                    'comment_info_after' => '</div></div>',
-                    'preview_start' => '<div class="panel panel-warning" id="comment_preview">',
-                    'preview_end' => '</div>',
-                    // Front page
-                    'featured_intro_before' => '<div class="jumbotron">',
-                    'featured_intro_after' => '</div>',
-                    // Form "Sending a message"
-                    'msgform_form_title' => T_('Sending a message'),
-                ));
+               skin_include( '$disp$', array(
+				'disp_posts'  => '',		// We already handled this case above
+				'disp_single' => '',		// We already handled this case above
+				'disp_page'   => '',		// We already handled this case above
+				'skin_form_params' => $Skin->get_template( 'Form' ),
+				'author_link_text' => 'preferredname',
+				'profile_tabs' => array(
+					'block_start'         => '<ul class="nav nav-tabs profile_tabs">',
+					'item_start'          => '<li>',
+					'item_end'            => '</li>',
+					'item_selected_start' => '<li class="active">',
+					'item_selected_end'   => '</li>',
+					'block_end'           => '</ul>',
+				),
+				'pagination' => array(
+					'block_start'           => '<div class="center"><ul class="pagination">',
+					'block_end'             => '</ul></div>',
+					'page_current_template' => '<span><b>$page_num$</b></span>',
+					'page_item_before'      => '<li>',
+					'page_item_after'       => '</li>',
+					'prev_text'             => '&lt;&lt;',
+					'next_text'             => '&gt;&gt;',
+				),
+				// Form params for the forms below: login, register, lostpassword, activateinfo and msgform
+				'skin_form_before'      => '<div class="panel panel-default skin-form">'
+																			.'<div class="panel-heading">'
+																				.'<h3 class="panel-title">$form_title$</h3>'
+																			.'</div>'
+																			.'<div class="panel-body">',
+				'skin_form_after'       => '</div></div>',
+				// Login
+				'display_form_messages' => true,
+				'form_title_login'      => T_('Log in to your account').'$form_links$',
+				'form_class_login'      => 'wrap-form-login',
+				'form_title_lostpass'   => get_request_title().'$form_links$',
+				'form_class_lostpass'   => 'wrap-form-lostpass',
+				'login_form_inskin'     => false,
+				'login_page_before'     => '<div class="$form_class$">',
+				'login_page_after'      => '</div>',
+				'login_form_class'      => 'form-login',
+				'display_reg_link'      => true,
+				'abort_link_position'   => 'form_title',
+				'abort_link_text'       => '<button type="button" class="close" aria-label="Close"><span aria-hidden="true">&times;</span></button>',
+				// Register
+				'register_page_before'      => '<div class="wrap-form-register">',
+				'register_page_after'       => '</div>',
+				'register_form_title'       => T_('Register'),
+				'register_form_class'       => 'form-register',
+				'register_links_attrs'      => '',
+				'register_use_placeholders' => true,
+				'register_field_width'      => 252,
+				'register_disabled_page_before' => '<div class="wrap-form-register register-disabled">',
+				'register_disabled_page_after'  => '</div>',
+				// Activate form
+				'activate_form_title'  => T_('Account activation'),
+				'activate_page_before' => '<div class="wrap-form-activation">',
+				'activate_page_after'  => '</div>',
+				// Profile
+				'profile_avatar_before' => '<div class="panel panel-default profile_avatar">',
+				'profile_avatar_after'  => '</div>',
+				// Search
+				'search_input_before'  => '<div class="input-group">',
+				'search_input_after'   => '',
+				'search_submit_before' => '<span class="input-group-btn">',
+				'search_submit_after'  => '</span></div>',
+				// Comment template
+				'comment_start'         => '<div class="evoComment panel panel-default">',
+				'comment_end'           => '</div>',
+				'comment_post_before'   => '<span class="panel-title in-response">',
+				'comment_post_after'    => '</span>',
+				'comment_title_before'  => '<div class="panel-heading">',
+				'comment_title_after'   => '<div class="clearfix"></div></div><div class="panel-body">',
+				'comment_avatar_before' => '<div class="evoComment-avatar">',
+				'comment_avatar_after'  => '</div>',
+				'comment_rating_before' => '<div class="evoComment-rating">',
+				'comment_rating_after'  => '</div>',
+				'comment_text_before'   => '<div class="evoComment-text">',
+				'comment_text_after'    => '</div>',
+				'comment_info_before'   => '<div class="evoComment-info clear text-muted"><small>',
+				'comment_info_after'    => '</small></div></div>',
+				'comment_attach_info'   => get_icon( 'help', 'imgtag', array(
+						'data-toggle'    => 'tooltip',
+						'data-placement' => 'bottom',
+						'data-html'      => 'true',
+						'title'          => htmlspecialchars( get_upload_restriction( array(
+								'block_after'     => '',
+								'block_separator' => '<br /><br />' ) ) )
+					) ),
+				// Front page
+				'featured_intro_before' => '<div class="jumbotron">',
+				'featured_intro_after'  => '</div>',
+				// Form "Sending a message"
+				'msgform_form_title' => T_('Sending a message'),
+			) );
                 // Note: you can customize any of the sub templates included here by
                 // copying the matching php file into your skin directory.
                 // ------------------------- END OF MAIN CONTENT TEMPLATE ---------------------------
