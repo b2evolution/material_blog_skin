@@ -630,6 +630,10 @@ svg {
     border-radius: 0px;
     margin-bottom: 2em;
     border-bottom: 1px solid @divider;
+
+    .content_full {
+        font-size: 0.96em;
+    }
 }
 
 .jumbotron .post {
@@ -643,7 +647,7 @@ svg {
 
 .main .title {
     font-size: 2.0em;
-    font-weight: 400;
+    font-weight: 300;
     color: #444;
     line-height: 120%;
     -ms-word-wrap: break-word;
@@ -678,7 +682,7 @@ svg {
         position: relative;
         font-weight: 400;
         color: @textcolor;
-        font-size: 1.2em;
+        font-size: 1.1em;
 
         i {
             margin-right: 6px;
@@ -919,8 +923,9 @@ svg {
 
 
 .main .comments_title {
-    margin: 1em 0;
-    font-size: 1.6em;
+    margin: 2em 0em 0.6em;
+    font-weight: 300;
+    font-size: 1.7em;
 }
 
 .main .evoComment {
@@ -950,7 +955,7 @@ svg {
         color: @primarycolor;
         float: left;
         margin-left: 1em;
-        margin-top: 0.8em;
+        margin-top: 1em;
         a {
             color: @primarycolor;
         }
@@ -980,18 +985,18 @@ svg {
     .panel-body {
         padding: 0.6em 0 0;
         clear: both;
-        
-        
+
+
         .evoComment-rating {
-           font-size: 0.76em;
-           margin: 0;
+            font-size: 0.76em;
+            margin: 0;
         }
 
         .evoComment-text {
             padding: 0.4em 0 0;
 
             p {
-               
+
             }
 
         }
@@ -999,12 +1004,11 @@ svg {
         .evoComment-info {
             margin: 1ex 0;
             font-size: 1.2em;
-            color: @primarycolor;
-
+            
             .comment_date {
                 margin-top: 18px;
                 float: left;
-
+                color: #666666;
                 i {
                     margin-right: 0.4em;
                     font-size: 1.1em;
@@ -1047,8 +1051,8 @@ svg {
     box-shadow: 0 0 0;
     border: 0;
     border-radius: 0;
-    margin-top: 4em;
-    margint-bottom: 0;
+    margin-top: 2.6em;
+    margin-bottom: 0;
 
     form {
         margin: 0;
@@ -1097,7 +1101,7 @@ svg {
         #comment_rating {
             visibility: visible;
         }
-        
+
     }
 
     textarea:focus {
@@ -1111,8 +1115,13 @@ svg {
         border: 0;
         border-radius: 0;
         padding: 0;
-        font-size: 1.2em;
         margin: 1em 0;
+        font-weight: 300;
+
+        h2 {
+            font-size: 1.7em;
+        }
+
     }
 
     .panel-body {
@@ -1165,6 +1174,8 @@ svg {
 
 }
 
+/* Star rating */
+
 
 .main div.star_rating, 
 .main div.star_rating div {
@@ -1178,11 +1189,11 @@ svg {
     height: auto;
     display: inline-block;
     visibility: hidden;
-    
+
     >div {
-       visibility: hidden;  
+        visibility: hidden;  
     }
-    
+
     .raty_cancel_off, .raty_cancel_on, .raty_star_off, .raty_star_on {
         background: transparent;
         text-indent: 0;
@@ -1201,6 +1212,104 @@ svg {
         color: #ec0;
     }
 }
+
+
+/* Ratings table */
+
+.ratings_table {
+    display: block;
+
+    td {
+        padding: 0;
+        border: 0;
+
+        >div:first-child {
+            text-align: left;
+            padding: 0em 0 1em;
+            strong {
+                font-weight: 400;
+            }
+        }
+
+        .rating_summary {
+
+            tbody {
+
+                tr {
+                    padding: 0em 0 .2em;
+                    display: block;
+
+                    th {
+                        border: 0;
+                        font-size: 0.8em;
+                    }
+
+                    td {
+                        text-align: right;
+                        padding-left: 5px;
+                        font-size: 1em;
+                        border-radius: 0;
+                        box-shadow: 0 0 0;
+                        padding: 0;
+                        height: auto;
+                        line-height: 1.2em;
+                        border: 0;
+                    }
+                    td:last-child {
+                        font-size: .8em;
+                        padding-left: .4em;
+                    }
+                    .progress {
+                        background: #eee;
+
+                        div {
+                            background: #FFE15F;
+                            padding: 0;
+                        }
+                    }
+
+
+                }
+
+            }
+
+        }
+
+
+        .rating_summary_total {
+            padding: 0px 0 0 20px;
+            text-align: left;
+
+            .average_rating {
+                padding-top: 0px;
+
+
+                .star_rating {
+                    width: auto !important;
+
+
+                    .comment_rating {
+                        padding: 0 .1em 0 0;
+                        font-size: 0.8em;
+                    }
+                }
+
+                span {
+                    margin-top: .4em;
+                }
+
+            }
+
+
+        }
+
+
+    }
+
+}
+
+
+
 
 
 
