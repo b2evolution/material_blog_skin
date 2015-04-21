@@ -161,17 +161,22 @@ $Comment->get_Item();
 
 	// Info:
 	echo $params['comment_info_before'];
+        
+        echo '<span class="comment_date"><i class="fa fa-clock-o"></i>';
+	$Comment->date(); echo ', '; $Comment->time( '#short_time' );
+        echo '</span>';
 
+        
+        echo '<span class="comment_actions">';
 	$commented_Item = & $Comment->get_Item();
 	$Comment->edit_link( '', '', '#', '#', 'permalink_right', '&amp;', true, rawurlencode( $Comment->get_permanent_url() ) ); /* Link to backoffice for editing */
 	$Comment->delete_link( '', '', '#', '#', 'permalink_right', false, '&amp;', true, false, '#', rawurlencode( $commented_Item->get_permanent_url() ) ); /* Link to backoffice for deleting */
 
-        echo '<span class="comment_date"><i class="fa fa-clock-o"></i>';
-	$Comment->date(); echo ', '; $Comment->time( '#short_time' );
-        echo '</span>';
+    
 	$Comment->reply_link(); /* Link for replying to the Comment */
 	$Comment->vote_helpful( '', '', '&amp;', true, true );
-
+        echo '</span>';
+        
 	echo $params['comment_info_after'];
 
 	echo $params['comment_end'];

@@ -938,6 +938,7 @@ svg {
     .evoComment-avatar {
         display: inline-block;
         float: left;
+        margin-right: 1em;
 
         .bCommentAvatar {
             border: 0;
@@ -954,7 +955,6 @@ svg {
         padding: 0;
         color: @primarycolor;
         float: left;
-        margin-left: 1em;
         margin-top: 1em;
         a {
             color: @primarycolor;
@@ -994,7 +994,7 @@ svg {
 
         .evoComment-text {
             padding: 0.4em 0 0;
-
+            font-size: 0.94em;
             p {
 
             }
@@ -1004,39 +1004,48 @@ svg {
         .evoComment-info {
             margin: 1ex 0;
             font-size: 1.2em;
-            
-            .comment_date {
-                margin-top: 18px;
-                float: left;
-                color: #666666;
-                i {
-                    margin-right: 0.4em;
-                    font-size: 1.1em;
+
+            small {
+                display: block;
+
+                .comment_date {
+                    margin-top: 18px;
                     color: #666666;
+                    float: left;
+                    i {
+                        margin-right: 0.4em;
+                        font-size: 1.1em;
+                        color: #666666;
+                    }
                 }
-            }
 
-            a {
-                display: inline-block;
-                margin: 0;
-                margin-left: .6em;
-                padding: .6em;
-                border-radius: 2px;
-                background: @linkcolor;
-                position: relative;
-                font-weight: 400;
-                color: @textcolor;
-                line-height: 1.4em;
+                .comment_actions {
+                    float: right;
+                }
 
-
-                span:before {
+                a {
+                    display: inline-block;
+                    margin: 0;
+                    margin-left: .6em;
+                    padding: .6em;
+                    border-radius: 2px;
+                    background: @linkcolor;
+                    position: relative;
                     font-weight: 400;
-                    color: #212121;
-                    font-size: 1.1em;
+                    color: @textcolor;
+                    line-height: 1.4em;
+                    float: none;
+
+                    span:before {
+                        font-weight: 400;
+                        color: #212121;
+                        font-size: 1.1em;
+                    }
                 }
-            }
-            a:hover {
-                color: @primarycolor;
+                a:hover {
+                    color: @primarycolor;
+                }
+
             }
         }
 
@@ -1411,6 +1420,17 @@ svg {
     .widget--social-media-links {
         margin-top: 0px; 
         margin-bottom: -1em;
+    }
+
+
+    .main .evoComment .panel-body .evoComment-info small 
+    .comment_actions {
+
+        float: left;
+        margin-top: 1em;
+        a {
+            margin: 0 .6em 0 0;
+        }
     }
 }
 
