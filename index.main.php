@@ -140,8 +140,8 @@ siteskin_include('_site_body_header.inc.php');
                 <?php
                 // ------------------------ TITLE FOR THE CURRENT REQUEST ------------------------
                 request_title(array(
-                    'title_before' => '<h4 class="title">',
-                    'title_after' => '</h4>',
+                    'title_before' => '<h2>',
+                    'title_after' => '</h2>',
                     'title_none' => '',
                     'glue' => ' - ',
                     'title_single_disp' => true,
@@ -151,6 +151,8 @@ siteskin_include('_site_body_header.inc.php');
                     'lostpassword_text' => '',
                     'account_activation' => '',
                     'msgform_text' => '',
+                    'user_text' => '',
+                    'users_text' => '',
                 ));
                 // ----------------------------- END OF REQUEST TITLE ----------------------------
                 ?>
