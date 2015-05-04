@@ -363,7 +363,7 @@ siteskin_include('_site_body_header.inc.php');
                             'block_end' => '</div>',
                             // This will enclose the title of each widget:
                             'block_title_start' => '<div class="panel-heading circle-svg-a">'
-                            . '<a onClick="return false;" class="panel-toggle" data-toggle="collapse" data-target".pcollapse-0" href="#">'
+                            . '<a onClick="return false;" class="panel-toggle" data-toggle="collapse" data-target=".pcollapse-0" href="#">'
                             . '<span class="panel-icon"><i class="fa fa-angle-down"></i></span></a>'
                             . '<span class="panel-title">',
                             'block_title_end' => '</span></div>',
