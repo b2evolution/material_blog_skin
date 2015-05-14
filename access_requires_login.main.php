@@ -3,7 +3,7 @@
  * This file is the template that displays an access denied for not logged in users
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
- * {@link http://b2evolution.net/man/skin-development-primer}
+ * {@link http://b2evolution.net/man/skin-structure}
  *
  * @package evoskins
  * @subpackage bootstrap
@@ -25,7 +25,6 @@ skin_init( $disp );
 
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
-<<<<<<< HEAD
 skin_include( '_html_header.inc.php', array(
 	'html_tag' => '<!DOCTYPE html>'."\r\n"
 	             .'<html lang="'.locale_lang( false ).'">',
@@ -33,9 +32,6 @@ skin_include( '_html_header.inc.php', array(
 ) );
 // Note: You can customize the default HTML header by copying the generic
 // /skins/_html_header.inc.php file into the current skin folder.
-=======
-skin_include( '_html_header.inc.php', array() );
->>>>>>> origin/master
 // -------------------------------- END OF HEADER --------------------------------
 
 
