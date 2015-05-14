@@ -17,7 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class material_Skin extends Skin
 {
-  /**
+	/**
 	 * Get default name for the skin.
 	 * Note: the admin can customize it.
 	 */
@@ -27,7 +27,7 @@ class material_Skin extends Skin
 	}
 
 
-  /**
+	/**
 	 * Get default type for the skin.
 	 */
 	function get_default_type()
@@ -35,7 +35,8 @@ class material_Skin extends Skin
 		return 'normal';
 	}
 
-        /**
+
+	/**
 	 * What evoSkins API does has this skin been designed with?
 	 *
 	 * This determines where we get the fallback templates from (skins_fallback_v*)
@@ -46,11 +47,10 @@ class material_Skin extends Skin
 		return 6;
 	}
 
-        
 
 	/**
-   * Get definitions for editable params
-   *
+	 * Get definitions for editable params
+	 *
 	 * @see Plugin::GetDefaultSettings()
 	 * @param local params like 'for_editing' => true
 	 */
@@ -202,9 +202,13 @@ class material_Skin extends Skin
 							.'</ul></div>',
 						'header_text_single' => '',
 					'header_end' => '',
-					'head_title' => '<div class="panel-heading">$title$<span class="pull-right">$global_icons$</span></div>'."\n",
-					'filters_start' => '<div class="filters panel-body form-inline">',
-					'filters_end' => '</div>',
+					'head_title' => '<div class="panel-heading fieldset_title"><span class="pull-right">$global_icons$</span><h3 class="panel-title">$title$</h3></div>'."\n",
+					'global_icons_class' => 'btn btn-default btn-sm',
+					'filters_start'        => '<div class="filters panel-body">',
+					'filters_end'          => '</div>',
+					'filter_button_class'  => 'btn-sm btn-info',
+					'filter_button_before' => '<div class="form-group pull-right">',
+					'filter_button_after'  => '</div>',
 					'messages_start' => '<div class="messages form-inline">',
 					'messages_end' => '</div>',
 					'messages_separator' => '<br />',
@@ -348,8 +352,8 @@ class material_Skin extends Skin
 					'labelempty'     => '<label class="control-label col-sm-12"></label>',
 					'inputstart'     => '<div class="controls col-sm-12">',
 					'inputend'       => "</div>\n",
-					'infostart'      => '<div class="controls col-sm-12">',
-					'infoend'        => "</div>\n",
+					'infostart'      => '<div class="controls col-sm-12"><div class="form-control-static">',
+					'infoend'        => "</div></div>\n",
 					'buttonsstart'   => '<div class="form-group"><div class="control-buttons col-sm-12">',
 					'buttonsend'     => "</div></div>\n\n",
 					'customstart'    => '<div class="custom_content">',
@@ -414,6 +418,51 @@ class material_Skin extends Skin
 					'fieldend_radio'         => '',
 					'inputstart_radio'       => '<div class="controls">',
 					'inputend_radio'         => "</div>\n",
+					'inputclass_radio'       => '',
+					'radio_label_format'     => '$radio_option_label$',
+					'radio_newline_start'    => '<div class="radio"><label>',
+					'radio_newline_end'      => "</label></div>\n",
+					'radio_oneline_start'    => '<label class="radio-inline">',
+					'radio_oneline_end'      => "</label>\n",
+				);
+
+			case 'fixed_form':
+				// Form with fixed label width:
+				return array(
+					'layout'         => 'fieldset',
+					'formclass'      => 'form-horizontal',
+					'formstart'      => '',
+					'formend'        => '',
+					'title_fmt'      => '<span style="float:right">$global_icons$</span><h2>$title$</h2>'."\n",
+					'no_title_fmt'   => '<span style="float:right">$global_icons$</span>'."\n",
+					'fieldset_begin' => '<div class="fieldset_wrapper $class$" id="fieldset_wrapper_$id$"><fieldset $fieldset_attribs$><div class="panel panel-default">'."\n"
+															.'<legend class="panel-heading" $title_attribs$>$fieldset_title$</legend><div class="panel-body $class$">'."\n",
+					'fieldset_end'   => '</div></div></fieldset></div>'."\n",
+					'fieldstart'     => '<div class="form-group fixedform-group" $ID$>'."\n",
+					'fieldend'       => "</div>\n\n",
+					'labelclass'     => 'control-label fixedform-label',
+					'labelstart'     => '',
+					'labelend'       => "\n",
+					'labelempty'     => '<label class="control-label fixedform-label"></label>',
+					'inputstart'     => '<div class="controls fixedform-controls">',
+					'inputend'       => "</div>\n",
+					'infostart'      => '<div class="controls fixedform-controls"><div class="form-control-static">',
+					'infoend'        => "</div></div>\n",
+					'buttonsstart'   => '<div class="form-group"><div class="control-buttons fixedform-controls">',
+					'buttonsend'     => "</div></div>\n\n",
+					'customstart'    => '<div class="custom_content">',
+					'customend'      => "</div>\n",
+					'note_format'    => ' <span class="help-inline">%s</span>',
+					// Additional params depending on field type:
+					// - checkbox
+					'inputclass_checkbox'    => '',
+					'inputstart_checkbox'    => '<div class="controls fixedform-controls"><div class="checkbox"><label>',
+					'inputend_checkbox'      => "</label></div></div>\n",
+					'checkbox_newline_start' => '<div class="checkbox">',
+					'checkbox_newline_end'   => "</div>\n",
+					// - radio
+					'fieldstart_radio'       => '<div class="form-group radio-group" $ID$>'."\n",
+					'fieldend_radio'         => "</div>\n\n",
 					'inputclass_radio'       => '',
 					'radio_label_format'     => '$radio_option_label$',
 					'radio_newline_start'    => '<div class="radio"><label>',

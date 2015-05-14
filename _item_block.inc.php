@@ -10,7 +10,6 @@
  * @copyright (c)2003-2015 by Francois Planque - {@link http://fplanque.com/}
  *
  * @package evoskins
- * @subpackage bootstrap
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
@@ -18,12 +17,16 @@ global $Item, $Skin;
 
 // Default params:
 $params = array_merge( array(
-		'feature_block'    => false,
-		'content_mode'     => 'auto',		// 'auto' will auto select depending on $disp-detail
-		'item_class'       => 'bPost',
-		'image_class'      => 'img-responsive',
-		'image_size'       => 'fit-1280x720',
-		'author_link_text' => 'preferredname',
+		'disp_title'        => true,
+		'feature_block'     => false,
+		'content_mode'      => 'auto',		// 'auto' will auto select depending on $disp-detail
+		'item_class'        => 'evo_post',
+		'item_type_class'   => 'evo_post__ptyp_',
+		'item_status_class' => 'evo_post__',
+		'item_disp_class'   => NULL,
+		'image_class'       => 'img-responsive',
+		'image_size'        => 'fit-1280x720',
+		'author_link_text'  => 'preferredname',
 	), $params );
 
 echo '<div id="styled_content_block">'; // Beginning of post display
@@ -34,7 +37,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 	<?php
 		$Item->locale_temp_switch(); // Temporarily switch to post locale (useful for multilingual blogs)
 
-		if( $disp != 'single' && $disp != 'page' )
+		if( $params['disp_title'] && $disp != 'single' && $disp != 'page' )
 		{ // Don't display this on disp=single because there is already title header in h2
 
 			$title_before = '<h2 class="title">';
@@ -62,14 +65,12 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 	if( ! $Item->is_intro() )
 	{ // Don't display these data for intro posts
 	?>
-	<div class="small text-muted meta">
+	<div class="small text-muted">
 	<?php
 		if( $Item->status != 'published' )
 		{
 			$Item->status( array( 'format' => 'styled' ) );
 		}
-                
-               
 		// Permalink:
 		$Item->permanent_link( array(
                         'before'    => '<span>',
@@ -132,7 +133,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 			) );
 	?>
 
-	<div class="small meta_footer">
+	<div class="small">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(

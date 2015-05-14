@@ -1,7 +1,6 @@
 <?php
 /**
- * This is the template that displays the feedback for a post
- * (comments, trackback, pingback...)
+ * This is the template that displays the feedback for a post (comments, trackback, pingback...)
  *
  * You may want to call this file multiple time in a row with different $c $tb $pb params.
  * This allow to seprate different kinds of feedbacks instead of displaying them mixed together
@@ -26,58 +25,59 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 
 // Default params:
 $params = array_merge( array(
-		'Item'                 => NULL,
-		'disp_comments'        => true,
-		'disp_comment_form'    => true,
-		'disp_trackbacks'      => true,
-		'disp_trackback_url'   => true,
-		'disp_pingbacks'       => true,
-		'disp_section_title'   => true,
-		'disp_rating_summary'  => true,
-		'before_section_title' => '<h3>',
-		'after_section_title'  => '</h3>',
+		'Item'                  => NULL,
+		'disp_comments'         => true,
+		'disp_comment_form'     => true,
+		'disp_trackbacks'       => true,
+		'disp_trackback_url'    => true,
+		'disp_pingbacks'        => true,
+		'disp_section_title'    => true,
+		'disp_rating_summary'   => true,
+		'before_section_title'  => '<h3>',
+		'after_section_title'   => '</h3>',
 		'comments_title_text'   => '',
 		'comment_list_start'    => "\n\n",
 		'comment_list_end'      => "\n\n",
-		'comment_start'         => '<div class="bComment">',
+		'comment_start'         => '<div class="evo_comment panel panel-default">',
 		'comment_end'           => '</div>',
-		'comment_avatar_before' => '<span class="bComment-avatar">',
+		'comment_post_display'	=> false,	// Do we want ot display the title of the post we're referring to?
+		'comment_post_before'   => '<h3 class="evo_comment_post_title">',
+		'comment_post_after'    => '</h3>',
+		'comment_title_before'  => '<div class="panel-heading"><h4 class="evo_comment_title panel-title">',
+		'comment_title_after'   => '</h4></div><div class="panel-body">',
+		'comment_avatar_before' => '<span class="evo_comment_avatar">',
 		'comment_avatar_after'  => '</span>',
-		'comment_title_before'  => '<div class="bCommentTitle">',
-		'comment_title_after'   => '</div>',
-		'comment_rating_before' => '<div class="comment_rating">',
+		'comment_rating_before' => '<div class="evo_comment_rating">',
 		'comment_rating_after'  => '</div>',
-		'comment_text_before'   => '<div class="bCommentText">',
+		'comment_text_before'   => '<div class="evo_comment_text">',
 		'comment_text_after'    => '</div>',
-		'comment_info_before'   => '<div class="bCommentSmallPrint">',
-		'comment_info_after'    => '</div>',
-		'preview_start'        => '<div class="bComment" id="comment_preview">',
-		'preview_end'          => '</div>',
-		'comment_error_start'  => '<div class="bComment" id="comment_error">',
-		'comment_error_end'    => '</div>',
-		'comment_template'     => '_item_comment.inc.php',	// The template used for displaying individual comments (including preview)
-		'comment_image_size'   => 'fit-400x320',
-		'author_link_text'     => 'name', // avatar_name | avatar_login | only_avatar | name | login | nickname | firstname | lastname | fullname | preferredname
-		'link_to'              => 'userurl>userpage',		    // 'userpage' or 'userurl' or 'userurl>userpage' or 'userpage>userurl'
-		'form_title_start'     => '<h3>',
-		'form_title_end'       => '</h3>',
-		'disp_notification'    => true,
-		'notification_before'  => '<div class="comment_notification">',
-		'notification_text'    => T_( 'This is your post. You are receiving notifications when anyone comments on your posts.' ),
-		'notification_text2'   => T_( 'You will be notified by email when someone comments here.' ),
-		'notification_text3'   => T_( 'Notify me by email when someone comments here.' ),
-		'notification_after'   => '</div>',
-		'feed_title'           => '#',
-		'disp_nav_top'         => true,
-		'disp_nav_bottom'      => true,
-		'nav_top_inside'       => false, // TRUE to display it after start of comments list (inside), FALSE to display a page navigation before comments list
-		'nav_bottom_inside'    => false, // TRUE to display it before end of comments list (inside), FALSE to display a page navigation after comments list
-		'nav_block_start'      => '<p class="center">',
-		'nav_block_end'        => '</p>',
-		'nav_prev_text'        => '&lt;&lt;',
-		'nav_next_text'        => '&gt;&gt;',
-		'nav_prev_class'       => '',
-		'nav_next_class'       => '',
+		'comment_info_before'   => '<div class="evo_comment_footer clear text-muted"><small>',
+		'comment_info_after'    => '</small></div></div>',
+		'preview_start'         => '<div class="evo_comment evo_comment__preview panel panel-warning" id="comment_preview">',
+		'preview_end'           => '</div>',
+		'comment_error_start'   => '<div class="evo_comment evo_comment__error panel panel-default" id="comment_error">',
+		'comment_error_end'     => '</div>',
+		'comment_template'      => '_item_comment.inc.php',	// The template used for displaying individual comments (including preview)
+		'comment_image_size'    => 'fit-400x320',
+		'author_link_text'      => 'name', // avatar_name | avatar_login | only_avatar | name | login | nickname | firstname | lastname | fullname | preferredname
+		'link_to'               => 'userurl>userpage',		    // 'userpage' or 'userurl' or 'userurl>userpage' or 'userpage>userurl'
+		'disp_notification'     => true,
+		'notification_before'   => '<div class="evo_post_comment_notification">',
+		'notification_text'     => T_( 'This is your post. You are receiving notifications when anyone comments on your posts.' ),
+		'notification_text2'    => T_( 'You will be notified by email when someone comments here.' ),
+		'notification_text3'    => T_( 'Notify me by email when someone comments here.' ),
+		'notification_after'    => '</div>',
+		'feed_title'            => '#',
+		'disp_nav_top'          => true,
+		'disp_nav_bottom'       => true,
+		'nav_top_inside'        => false, // TRUE to display it after start of comments list (inside), FALSE to display a page navigation before comments list
+		'nav_bottom_inside'     => false, // TRUE to display it before end of comments list (inside), FALSE to display a page navigation after comments list
+		'nav_block_start'       => '<p class="center">',
+		'nav_block_end'         => '</p>',
+		'nav_prev_text'         => '&lt;&lt;',
+		'nav_next_text'         => '&gt;&gt;',
+		'nav_prev_class'        => '',
+		'nav_next_class'        => '',
 	), $params );
 
 
@@ -433,7 +433,7 @@ if( is_logged_in() && $Item->can_comment( NULL ) )
 if( $Item->can_see_comments( false ) && ( $params['disp_comments'] || $params['disp_trackbacks'] || $params['disp_pingbacks'] ) )
 {	// user is allowed to see comments
 	// Display link for comments feed:
-	$Item->feedback_feed_link( '_rss2', '<div class="feedback_feed_msg"><p>', '</p></div>', $params['feed_title'] );
+	$Item->feedback_feed_link( '_rss2', '<div class="evo_post_feedback_feed_msg"><p>', '</p></div>', $params['feed_title'] );
 }
 
 ?>

@@ -16,14 +16,15 @@ global $cookie_name, $cookie_email, $cookie_url;
 global $comment_allowed_tags;
 global $comment_cookies, $comment_allow_msgform;
 global $checked_attachments; // Set this var as global to use it in the method $Item->can_attach()
-global $PageCache;
+global $PageCache, $Session;
 global $Blog, $dummy_fields;
 
 // Default params:
 $params = array_merge( array(
 		'disp_comment_form'    => true,
-		'form_title_start'     => '<h2>',
-		'form_title_end'       => '</h2>',
+		'form_title_start'     => '<div class="panel '.( $Session->get('core.preview_Comment') ? 'panel-danger' : 'panel-default' )
+															 .' comment_form"><div class="panel-heading"><h2 class="panel-title">',
+		'form_title_end'       => '</h2></div><div class="panel-body">',
 		'form_title_text'      => T_('Leave a comment'),
 		'form_comment_text'    => T_('Comment text'),
 		'form_submit_text'     => T_('Send comment'),
@@ -33,7 +34,7 @@ $params = array_merge( array(
 		'textarea_lines'       => 10,
 		'default_text'         => '',
 		'preview_block_start'  => '',
-		'preview_start'        => '<div class="bComment" id="comment_preview">',
+		'preview_start'        => '<div class="evo_comment evo_comment__preview panel panel-warning" id="comment_preview">',
 		'comment_template'     => '_item_comment.inc.php',	// The template used for displaying individual comments (including preview)
 		'preview_end'          => '</div>',
 		'preview_block_end'    => '',
@@ -41,10 +42,17 @@ $params = array_merge( array(
 		'comment_closed_text'  => '#',
 		'after_comment_error'  => '</em></p>',
 		'before_comment_form'  => '',
-		'after_comment_form'   => '',
+		'after_comment_form'   => '</div></div>',
 		'form_comment_redirect_to' => $Item->get_feedback_url( $disp == 'feedback-popup', '&' ),
-		'comment_image_size'   => 'fit-400x320',
-		'comment_attach_info'  => '<br />'.get_upload_restriction(),
+		'comment_image_size'       => 'fit-400x320',
+		'comment_attach_info'      => get_icon( 'help', 'imgtag', array(
+				'data-toggle'    => 'tooltip',
+				'data-placement' => 'bottom',
+				'data-html'      => 'true',
+				'title'          => htmlspecialchars( get_upload_restriction( array(
+						'block_after'     => '',
+						'block_separator' => '<br /><br />' ) ) )
+			) ),
 	), $params );
 
 $comment_reply_ID = param( 'reply_ID', 'integer', 0 );
@@ -196,11 +204,11 @@ function validateCommentForm(form)
 /* ]]> *
 </script>';*/
 
-	$Form = new Form( $samedomain_htsrv_url.'comment_post.php', 'bComment_form_id_'.$Item->ID, 'post', NULL, 'multipart/form-data' );
+	$Form = new Form( $samedomain_htsrv_url.'comment_post.php', 'evo_comment_form_id_'.$Item->ID, 'post', NULL, 'multipart/form-data' );
 
 	$Form->switch_template_parts( $params['form_params'] );
 
-	$Form->begin_form( 'bComment', '', array( 'target' => '_self'/*, 'onsubmit' => 'return validateCommentForm(this);'*/ ) );
+	$Form->begin_form( 'evo_form', '', array( 'target' => '_self'/*, 'onsubmit' => 'return validateCommentForm(this);'*/ ) );
 
 	// TODO: dh> a plugin hook would be useful here to add something to the top of the Form.
 	//           Actually, the best would be, if the $Form object could be changed by a plugin
@@ -238,14 +246,14 @@ function validateCommentForm(form)
 			$comment_author_email = $current_User->email;
 		}
 		// Note: we use funky field names to defeat the most basic guestbook spam bots
-		$Form->text( $dummy_fields[ 'name' ], $comment_author, 40, T_('Name'), '', 100, 'bComment' );
+		$Form->text( $dummy_fields[ 'name' ], $comment_author, 40, T_('Name'), '', 100, 'evo_comment_field' );
 
-		$Form->text( $dummy_fields[ 'email' ], $comment_author_email, 40, T_('Email'), '<br />'.T_('Your email address will <strong>not</strong> be revealed on this site.'), 255, 'bComment' );
+		$Form->text( $dummy_fields[ 'email' ], $comment_author_email, 40, T_('Email'), '<br />'.T_('Your email address will <strong>not</strong> be revealed on this site.'), 255, 'evo_comment_field' );
 
 		$Item->load_Blog();
 		if( $Item->Blog->get_setting( 'allow_anon_url' ) )
 		{
-			$Form->text( $dummy_fields[ 'url' ], $comment_author_url, 40, T_('Website'), '<br />'.T_('Your URL will be displayed.'), 255, 'bComment' );
+			$Form->text( $dummy_fields[ 'url' ], $comment_author_url, 40, T_('Website'), '<br />'.T_('Your URL will be displayed.'), 255, 'evo_comment_field' );
 		}
 	}
 

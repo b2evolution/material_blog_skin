@@ -50,6 +50,19 @@
         });
 
   }
+  
+  
+     /* Social Icons Setup */
+    
+    $('.widget_core_user_links a').each(function(){
+        
+       var mthis = $(this);
+       
+       var class_attr = $(mthis).attr('class');
+       
+       $(mthis).children('span').addClass(class_attr);
+        
+    });
     
 
     var panel_id = 0;
@@ -119,10 +132,6 @@
         $(this).css('visibility', 'visible');
 
     });
-
-
-
-
 
 
 

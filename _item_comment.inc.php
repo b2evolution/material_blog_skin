@@ -14,21 +14,21 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
 
 // Default params:
 $params = array_merge( array(
-		'comment_start'         => '<div class="bComment">',
+		'comment_start'         => '<div class="evo_comment panel panel-default">',
 		'comment_end'           => '</div>',
 		'comment_post_display'	=> false,	// Do we want ot display the title of the post we're referring to?
-		'comment_post_before'   => '<h3 class="bTitle">',
+		'comment_post_before'   => '<h3 class="evo_comment_post_title">',
 		'comment_post_after'    => '</h3>',
-		'comment_title_before'  => '<div class="bCommentTitle">',
-		'comment_title_after'   => '</div>',
-		'comment_avatar_before' => '<span class="bComment-avatar">',
+		'comment_title_before'  => '<div class="panel-heading"><h4 class="evo_comment_title panel-title">',
+		'comment_title_after'   => '</h4></div><div class="panel-body">',
+		'comment_avatar_before' => '<span class="evo_comment_avatar">',
 		'comment_avatar_after'  => '</span>',
-		'comment_rating_before' => '<div class="comment_rating">',
+		'comment_rating_before' => '<div class="evo_comment_rating">',
 		'comment_rating_after'  => '</div>',
-		'comment_text_before'   => '<div class="bCommentText">',
+		'comment_text_before'   => '<div class="evo_comment_text">',
 		'comment_text_after'    => '</div>',
-		'comment_info_before'   => '<div class="bCommentSmallPrint">',
-		'comment_info_after'    => '</div>',
+		'comment_info_before'   => '<div class="evo_comment_footer clear text-muted"><small>',
+		'comment_info_after'    => '</small></div></div>',
 		'link_to'               => 'userurl>userpage', // 'userpage' or 'userurl' or 'userurl>userpage' or 'userpage>userurl'
 		'author_link_text'      => 'name', // avatar_name | avatar_login | only_avatar | name | login | nickname | firstname | lastname | fullname | preferredname
 		'before_image'          => '<div class="image_block">',
@@ -59,25 +59,24 @@ $Comment->get_Item();
 		$Comment->status( 'styled' );
 	}
 
-	
-
+        
         // Avatar:
 	echo $params['comment_avatar_before'];
 	$Comment->avatar();
-        echo $params['comment_avatar_after'];
-        
+	echo $params['comment_avatar_after'];
+	
+
 	// Title
 	echo $params['comment_title_before'];
         
-        
-	echo '<h4 class="panel-title">';
+        echo '<h4 class="panel-title">';
         
 	switch( $Comment->get( 'type' ) )
 	{
 		case 'comment': // Display a comment:
 			if( empty($Comment->ID) )
 			{	// PREVIEW comment
-				echo '<span class="bComment-preview-type">'.T_('PREVIEW Comment from:').'</span> ';
+				echo '<span class="evo_comment_type_preview">'.T_('PREVIEW Comment from:').'</span> ';
 			}
 			else
 			{	// Normal comment
@@ -85,7 +84,7 @@ $Comment->get_Item();
 						'before'    => '',
 						'after'     => ' '.T_('from:').' ',
 						'text'      => T_('Comment'),
-						'class'		=> 'bComment-type',
+						'class'		=> 'evo_comment_type',
 						'nofollow'  => true,
 					) );
 			}
@@ -111,7 +110,7 @@ $Comment->get_Item();
 					'before'    => '',
 					'after'     => ' '.T_('from:').' ',
 					'text' 		=> T_('Trackback'),
-					'class'		=> 'bComment-type',
+					'class'		=> 'evo_comment_type',
 					'nofollow'	=> true,
 				) );
 			$Comment->author( '', '#', '', '#', 'htmlbody', true, $params['author_link_text'] );
@@ -122,16 +121,15 @@ $Comment->get_Item();
 					'before'    => '',
 					'after'     => ' '.T_('from:').' ',
 					'text' 		=> T_('Pingback'),
-					'class'		=> 'bComment-type',
+					'class'		=> 'evo_comment_type',
 					'nofollow'	=> true,
 				) );
 			$Comment->author( '', '#', '', '#', 'htmlbody', true, $params['author_link_text'] );
 			break;
 	}
-        
         echo '</h4>';
         
-         // Post title
+        // Post title
 	if( $params['comment_post_display'] )
 	{
 		echo $params['comment_post_before'];
@@ -142,11 +140,10 @@ $Comment->get_Item();
 		echo $params['comment_post_after'];
 	}
         
+        
 	echo $params['comment_title_after'];
 
 	
-       
-        
 
 	// Rating:
 	$Comment->rating( array(
@@ -161,18 +158,17 @@ $Comment->get_Item();
 
 	// Info:
 	echo $params['comment_info_before'];
-        
+
         echo '<span class="comment_date"><i class="fa fa-clock-o"></i>';
 	$Comment->date(); echo ', '; $Comment->time( '#short_time' );
         echo '</span>';
-
         
         echo '<span class="comment_actions">';
 	$commented_Item = & $Comment->get_Item();
 	$Comment->edit_link( '', '', '#', '#', 'permalink_right', '&amp;', true, rawurlencode( $Comment->get_permanent_url() ) ); /* Link to backoffice for editing */
 	$Comment->delete_link( '', '', '#', '#', 'permalink_right', false, '&amp;', true, false, '#', rawurlencode( $commented_Item->get_permanent_url() ) ); /* Link to backoffice for deleting */
 
-    
+        
 	$Comment->reply_link(); /* Link for replying to the Comment */
 	$Comment->vote_helpful( '', '', '&amp;', true, true );
         echo '</span>';

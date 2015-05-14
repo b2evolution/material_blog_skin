@@ -1,7 +1,7 @@
 <?php
 /**
- * This is the template that displays the contents for a post
- * (images, teaser, more link, body, etc...)
+ * This is the template that displays the contents for a post (images, teaser, more link, body, etc...)
+ * It's typically called by the item_block template.
  *
  * This file is not meant to be called directly.
  * It is meant to be called by an include in the main.page.php template (or other templates)
@@ -23,24 +23,34 @@ $params = array_merge( array(
 		'intro_mode'               => 'auto', // Same as above. This will typically be forced to "normal" when displaying an intro section so that intro posts always display as normal there
 		'force_more'               => false, // This will be set to true id 'content_mode' resolves to 'full'.
 
-		'content_display_full'     => true, // Do we want to display post content at all, false to display images/attachments only
-		'content_start_excerpt'    => '<div class="content_excerpt">',
+		'content_display_full'     => true, // Do we want to display all post content? false to display only images/attachments
+
+		// Wrap images and text:
+		'content_start_excerpt'    => '<div class="evo_post__excerpt">',		// In case of compact display
 		'content_end_excerpt'      => '</div>',
-		'content_start_full'       => '<div class="content_full">',
+		'content_start_full'       => '<div class="evo_post__full">',			// In case of full display
 		'content_end_full'         => '</div>',
-		'excerpt_before_text'      => '<div class="excerpt">',
+
+		// In case we display a compact version of the post:
+		'excerpt_before_text'      => '<div class="evo_post__excerpt_text">',
 		'excerpt_after_text'       => '</div>',
-		'excerpt_before_more'      => ' <span class="excerpt_more">',
+
+		'excerpt_before_more'      => ' <span class="evo_post__excerpt_more_link">',
 		'excerpt_after_more'       => '</span>',
 		'excerpt_more_text'        => T_('more').' &raquo;',
+
+		// In case we display a full version of the post:
+		'content_start_full_text'  => '<div class="evo_post__full_text">',
+		'content_end_full_text'    => '</div>',
+
 		'before_content_teaser'    => '',
 		'after_content_teaser'     => '',
 		'before_content_extension' => '',
 		'after_content_extension'  => '',
 
-		'before_images'            => '<div class="bImages">',
-		'before_image'             => '<div class="image_block">',
-		'before_image_legend'      => '<div class="image_legend">',
+		'before_images'            => '<div class="evo_post_images">',
+		'before_image'             => '<div class="evo_image_block">',
+		'before_image_legend'      => '<div class="evo_image_legend">',
 		'after_image_legend'       => '</div>',
 		'after_image'              => '</div>',
 		'after_images'             => '</div>',
@@ -52,34 +62,36 @@ $params = array_merge( array(
 		'excerpt_image_size'       => 'fit-80x80',
 		'excerpt_image_limit'      => 1,
 		'excerpt_image_link_to'    => 'single',
+		'include_cover_images'     => true,
 
-		'before_gallery'           => '<div class="bGallery">',
+		'before_gallery'           => '<div class="evo_post_gallery">',
 		'after_gallery'            => '</div>',
 		'gallery_image_size'       => 'crop-80x80',
 		'gallery_image_limit'      => 1000,
 		'gallery_colls'            => 5,
 		'gallery_order'            => '', // Can be 'ASC', 'DESC', 'RAND' or empty
 
-		'before_url_link'          => '<p class="post_link">'.T_('Link:').' ',
+		'before_url_link'          => '<p class="evo_post_link">'.T_('Link:').' ',
 		'after_url_link'           => '</p>',
 		'url_link_text_template'   => '$url$', // If evaluates to empty, nothing will be displayed (except player if podcast)
 		'url_link_url_template'    => '$url$', // $url$ will be replaced with saved URL address
 		'url_link_target'          => '', // Link target attribute e.g. '_blank'
-		'before_more_link'         => '<p class="bMore">',
+
+		'before_more_link'         => '<p class="evo_post_more_link">',
 		'after_more_link'          => '</p>',
 		'more_link_text'           => '#',
 		'more_link_to'             => 'single#anchor', // Can be 'single' or 'single#anchor' which is permalink + "#more55" where 55 is item ID
-		'anchor_text'              => '<p class="bMore">...</p>', // Text to display as the more anchor (once the more link has been clicked, '#' defaults to "Follow up:")
+		'anchor_text'              => '<p class="evo_post_more_anchor">...</p>', // Text to display as the more anchor (once the more link has been clicked, '#' defaults to "Follow up:")
 
 		'limit_attach'             => 1000,
-		'attach_list_start'        => '<div class="attachments"><h3>'.T_('Attachments').':</h3><ul class="bFiles">',
+		'attach_list_start'        => '<div class="evo_post_attachments"><h3>'.T_('Attachments').':</h3><ul class="evo_files">',
 		'attach_list_end'          => '</ul></div>',
-		'attach_start'             => '<li>',
+		'attach_start'             => '<li class="evo_file">',
 		'attach_end'               => '</li>',
-		'before_attach_size'       => ' <span class="file_size">(',
+		'before_attach_size'       => ' <span class="evo_file_size">(',
 		'after_attach_size'        => ')</span>',
 
-		'page_links_start'         => '<p class="right">'.T_('Pages:').' ',
+		'page_links_start'         => '<p class="evo_post_pagination">'.T_('Pages:').' ',
 		'page_links_end'           => '</p>',
 		'page_links_separator'     => '&middot; ',
 		'page_links_single'        => '',
@@ -88,7 +100,7 @@ $params = array_merge( array(
 		'page_links_url'           => '',
 
 		'footer_text_mode'         => '#', // 'single', 'xml' or empty. Will detect 'single' from $disp automatically.
-		'footer_text_start'        => '<div class="item_footer">',
+		'footer_text_start'        => '<div class="evo_post_footer">',
 		'footer_text_end'          => '</div>',
 	), $params );
 
@@ -136,10 +148,19 @@ if( $content_mode == 'auto' )
 	}
 }
 
+if( $params['include_cover_images'] )
+{ // Include the cover images on teaser place
+	$teaser_image_positions = 'cover,teaser,teaserperm,teaserlink';
+}
+else
+{ // Don't include the cover images
+	$teaser_image_positions = 'teaser,teaserperm,teaserlink';
+}
+
 switch( $content_mode )
 {
 	case 'excerpt':
-		// Reduced display:
+		// Compact display:
 		echo $params['content_start_excerpt'];
 
 		if( !empty($params['excerpt_image_size']) )
@@ -162,8 +183,8 @@ switch( $content_mode )
 					'gallery_image_limit' => $params['gallery_image_limit'],
 					'gallery_colls'       => $params['gallery_colls'],
 					'gallery_order'       => $params['gallery_order'],
-					// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'albumart'
-					'restrict_to_image_position' => 'teaser,teaserperm,teaserlink',
+					// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'cover'
+					'restrict_to_image_position' => $teaser_image_positions,
 				) );
 		}
 
@@ -179,12 +200,13 @@ switch( $content_mode )
 		break;
 
 	case 'full':
+		// Full display:
 		$params['force_more'] = true;
 		$params['anchor_text'] = '';
 		/* continue down */
 	case 'normal':
 	default:
-		// Full dislpay:
+		// Normal dislpay:  (and Full display if force_more is true)
 		echo $params['content_start_full'];
 
 		if( ! empty($params['image_size']) )
@@ -207,14 +229,15 @@ switch( $content_mode )
 					'gallery_image_limit' => $params['gallery_image_limit'],
 					'gallery_colls'       => $params['gallery_colls'],
 					'gallery_order'       => $params['gallery_order'],
-					// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'albumart'
-					'restrict_to_image_position' => 'teaser,teaserperm,teaserlink',
+					// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'cover'
+					'restrict_to_image_position' => $teaser_image_positions,
 				) );
 		}
 
 		if( $params['content_display_full'] )
-		{
-			echo '<div class="bText">';
+		{	// We want to display text, not just images:
+
+			echo $params['content_start_full_text'];
 
 			// URL link, if the post has one:
 			$Item->url_link( array(
@@ -251,7 +274,7 @@ switch( $content_mode )
 
 			if( ! empty($params['image_size']) && $more && $Item->has_content_parts($params) /* only if not displayed all images already */ )
 			{
-				// Display images that are linked to this post:
+				// Display images that are linked "after more" to this post:
 				$Item->images( array(
 						'before'              => $params['before_images'],
 						'before_image'        => $params['before_image'],
@@ -269,17 +292,23 @@ switch( $content_mode )
 						'gallery_image_limit' => $params['gallery_image_limit'],
 						'gallery_colls'       => $params['gallery_colls'],
 						'gallery_order'       => $params['gallery_order'],
-						// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'albumart'
+						// Optionally restrict to files/images linked to specific position: 'teaser'|'teaserperm'|'teaserlink'|'aftermore'|'inline'|'cover'
 						'restrict_to_image_position' => 'aftermore',
 					) );
 			}
 
 			$Item->content_extension( array(
-					'before'      => $params['before_content_extension'],
-					'after'       => $params['after_content_extension'],
-					'force_more'  => $params['force_more'],
-					'image_class' => $params['image_class'],
-					'image_size'  => $params['image_size'],
+					'before'              => $params['before_content_extension'],
+					'after'               => $params['after_content_extension'],
+					'before_image'        => $params['before_image'],
+					'before_image_legend' => $params['before_image_legend'],
+					'after_image_legend'  => $params['after_image_legend'],
+					'after_image'         => $params['after_image'],
+					'image_class'         => $params['image_class'],
+					'image_size'          => $params['image_size'],
+					'limit'               => $params['image_limit'],
+					'image_link_to'       => $params['image_link_to'],
+					'force_more'          => $params['force_more'],
 				) );
 
 			// Links to post pages (for multipage posts):
@@ -300,7 +329,7 @@ switch( $content_mode )
 					'block_end'   => $params['footer_text_end'],
 				) );
 
-			echo '</div>';
+			echo $params['content_end_full_text'];
 		}
 
 		if( ! empty($params['limit_attach'])
@@ -318,7 +347,7 @@ switch( $content_mode )
 		}
 
 		// Display location info
-		$Item->location( '<div class="item_location"><strong>'.T_('Location').': </strong>', '</div>' );
+		$Item->location( '<div class="evo_post_location"><strong>'.T_('Location').': </strong>', '</div>' );
 
 		if( $disp == 'single' )
 		{	// Display custom fields
