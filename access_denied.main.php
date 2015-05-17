@@ -4,6 +4,12 @@
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
  * {@link http://b2evolution.net/man/skin-structure}
+<<<<<<< HEAD
+=======
+ *
+ * The main page template is used to display the blog when no specific page template is available
+ * to handle the request (based on $disp).
+>>>>>>> parent of aa91dbb... quick 6.4.1 compatibility attempt
  *
  * @package evoskins
  * @subpackage bootstrap
@@ -27,7 +33,10 @@ skin_init( $disp );
 skin_include( '_html_header.inc.php', array(
 	'html_tag' => '<!DOCTYPE html>'."\r\n"
 	             .'<html lang="'.locale_lang( false ).'">',
+<<<<<<< HEAD
 	'viewport_tag' => '#responsive#',
+=======
+>>>>>>> parent of aa91dbb... quick 6.4.1 compatibility attempt
 ) );
 // Note: You can customize the default HTML header by copying the generic
 // /skins/_html_header.inc.php file into the current skin folder.
