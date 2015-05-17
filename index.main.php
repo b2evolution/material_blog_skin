@@ -1,24 +1,24 @@
 <?php
 /**
- * This is the main/default page template for the "bootstrap" skin.
+ * This is the main/default page template for the "bootstrap_blog" skin.
  *
  * This skin only uses one single template which includes most of its features.
  * It will also rely on default includes for specific dispays (like the comment form).
  *
  * For a quick explanation of b2evo 2.0 skins, please start here:
- * {@link http://b2evolution.net/man/skin-structure}
+ * {@link http://b2evolution.net/man/skin-development-primer}
  *
  * The main page template is used to display the blog when no specific page template is available
  * to handle the request (based on $disp).
  *
  * @package evoskins
- * @subpackage bootstrap
+ * @subpackage bootstrap_blog
  */
-if (!defined('EVO_MAIN_INIT'))
-    die('Please, do not access this page directly.');
+if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
-if (version_compare($app_version, '6.4') < 0) { // Older skins (versions 2.x and above) should work on newer b2evo versions, but newer skins may not work on older b2evo versions.
-    die('This skin is designed for b2evolution 6.4 and above. Please <a href="http://b2evolution.net/downloads/index.html">upgrade your b2evolution</a>.');
+if( version_compare( $app_version, '6.4' ) < 0 )
+{ // Older skins (versions 2.x and above) should work on newer b2evo versions, but newer skins may not work on older b2evo versions.
+	die( 'This skin is designed for b2evolution 6.4 and above. Please <a href="http://b2evolution.net/downloads/index.html">upgrade your b2evolution</a>.' );
 }
 
 // This is the main template; it may be used to display very different things.
@@ -27,13 +27,7 @@ skin_init($disp);
 
 
 // -------------------------- HTML HEADER INCLUDED HERE --------------------------
-skin_include('_html_header.inc.php', array(
-    'html_tag' => '<!DOCTYPE html>' . "\r\n"
-    . '<html lang="' . locale_lang(false) . '">',
-    'viewport_tag' => '#responsive#',
-));
-// Note: You can customize the default HTML header by copying the generic
-// /skins/_html_header.inc.php file into the current skin folder.
+skin_include( '_html_header.inc.php', array() );
 // -------------------------------- END OF HEADER --------------------------------
 // ---------------------------- SITE HEADER INCLUDED HERE ----------------------------
 // If site headers are enabled, they will be included here:
@@ -45,9 +39,9 @@ siteskin_include('_site_body_header.inc.php');
 
     <div class="container">
         <div class="masterhead">
-            <div class="row">
+            <header class="row">
 
-                <div class="coll-xs-12 col-sm-12 col-md-8">
+                 <div class="coll-xs-12 col-sm-12 col-md-8">
                     <div class="evo_container evo_container__header">
                         <?php
                         // ------------------------- "Header" CONTAINER EMBEDDED HERE --------------------------
@@ -84,10 +78,10 @@ siteskin_include('_site_body_header.inc.php');
                         ?>
                     </div>
                 </div>
-            </div>
+            </header>
         </div>
 
-        <div class="row">
+        <nav class="row">
             <div class="col-md-12">
                 <ul class="nav circle-svg-a evo_container evo_container__menu">
                     <?php
@@ -112,7 +106,7 @@ siteskin_include('_site_body_header.inc.php');
                     ?>
                 </ul>
             </div>
-        </div>
+        </nav>
 
         <!-- =================================== START OF MAIN AREA =================================== -->
         <div class="row">
@@ -132,18 +126,18 @@ siteskin_include('_site_body_header.inc.php');
                 }
                 ?>
 
-                <?php
-                // ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
-                item_prevnext_links(array(
-                    'block_start' => '<ul class="pager">',
-                    'prev_start' => '<li class="previous">',
-                    'prev_end' => '</li>',
-                    'next_start' => '<li class="next">',
-                    'next_end' => '</li>',
-                    'block_end' => '</ul>',
-                ));
-                // ------------------------- END OF PREV/NEXT POST LINKS -------------------------
-                ?>
+		<?php
+			// ------------------- PREV/NEXT POST LINKS (SINGLE POST MODE) -------------------
+			item_prevnext_links( array(
+					'block_start' => '<nav><ul class="pager">',
+						'prev_start'  => '<li class="previous">',
+						'prev_end'    => '</li>',
+						'next_start'  => '<li class="next">',
+						'next_end'    => '</li>',
+					'block_end'   => '</ul></nav>',
+				) );
+			// ------------------------- END OF PREV/NEXT POST LINKS -------------------------
+		?>
 
                 <?php
                 // ------------------------ TITLE FOR THE CURRENT REQUEST ------------------------
@@ -153,6 +147,7 @@ siteskin_include('_site_body_header.inc.php');
                     'title_none' => '',
                     'glue' => ' - ',
                     'title_single_disp' => true,
+		    'title_page_disp'   => false,
                     'format' => 'htmlbody',
                     'register_text' => '',
                     'login_text' => '',
@@ -165,20 +160,22 @@ siteskin_include('_site_body_header.inc.php');
                 // ----------------------------- END OF REQUEST TITLE ----------------------------
                 ?>
 
-                <?php
-                // Go Grab the featured post:
-                if ($Item = & get_featured_Item()) { // We have a featured/intro post to display:
-                    // ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
-                    echo '<div class="panel panel-default"><div class="panel-body">';
-                    skin_include('_item_block.inc.php', array(
-                        'feature_block' => true,
-                        'content_mode' => 'auto', // 'auto' will auto select depending on $disp-detail
-                        'intro_mode' => 'normal', // Intro posts will be displayed in normal mode
-                    ));
-                    echo '</div></div>';
-                    // ----------------------------END ITEM BLOCK  ----------------------------
-                }
-                ?>
+		<?php
+		// Go Grab the featured post:
+		if( $Item = & get_featured_Item() )
+		{ // We have a featured/intro post to display:
+			// ---------------------- ITEM BLOCK INCLUDED HERE ------------------------
+			echo '<div class="panel panel-default"><div class="panel-body">';
+			skin_include( '_item_block.inc.php', array(
+					'feature_block' => true,
+					'content_mode' => 'full', // We want regular "full" content, even in category browsing: i-e no excerpt or thumbnail
+					'intro_mode'   => 'normal',	// Intro posts will be displayed in normal mode
+					'item_class'   => 'featured_post',
+				) );
+			echo '</div></div>';
+			// ----------------------------END ITEM BLOCK  ----------------------------
+		}
+		?>
 
                 <?php
                 if ($disp != 'front' && $disp != 'download' && $disp != 'search') {
@@ -236,12 +233,12 @@ siteskin_include('_site_body_header.inc.php');
                     'author_link_text' => 'preferredname',
                     // Profile tabs to switch between user edit forms
                     'profile_tabs' => array(
-                        'block_start' => '<ul class="nav nav-tabs profile_tabs">',
+			'block_start'         => '<nav><ul class="nav nav-tabs profile_tabs">',
                         'item_start' => '<li>',
                         'item_end' => '</li>',
                         'item_selected_start' => '<li class="active">',
                         'item_selected_end' => '</li>',
-                        'block_end' => '</ul>',
+			'block_end'           => '</ul></nav>',
                     ),
                     // Pagination
                     'pagination' => array(
@@ -332,7 +329,7 @@ siteskin_include('_site_body_header.inc.php');
             <?php
             if ($Skin->get_setting('layout') != 'single_column') {
                 ?>
-                <div class="col-md-3<?php echo ( $Skin->get_setting('layout') == 'left_sidebar' ? ' pull-left' : '' ); ?>">
+		<aside class="col-md-3<?php echo ( $Skin->get_setting( 'layout' ) == 'left_sidebar' ? ' pull-left' : '' ); ?>">
                     <div class="content panel-group evo_container evo_container__sidebar">
                         <?php
                         // ------------------------- "Sidebar" CONTAINER EMBEDDED HERE --------------------------
@@ -413,34 +410,37 @@ siteskin_include('_site_body_header.inc.php');
                         // ----------------------------- END OF "Sidebar" CONTAINER -----------------------------
                         ?>
                     </div>
-                </div>
-<?php } ?>
-        </div>
+	</aside><!-- .col -->
+	<?php } ?>
+
+</div><!-- .row -->
 
 
-        <!-- =================================== START OF FOOTER =================================== -->
-        <div class="row">
-            <div class="col-md-12 center">
-                <div class="content evo_container evo_container__footer">
-                    <?php
-                    // Display container and contents:
-                    skin_container(NT_("Footer"), array(
-                        // The following params will be used as defaults for widgets included in this container:
-                        'block_start' => '<div class="evo_widget $wi_class$">',
-                        'block_end' => '</div>',
-                    ));
-                    // Note: Double quotes have been used around "Footer" only for test purposes.
-                    ?>
-                    <p>
-                        <?php
-                        // Display footer text (text can be edited in Blog Settings):
-                        $Blog->footer_text(array(
-                            'before' => '',
-                            'after' => ' &bull; ',
-                        ));
+<footer class="row">
 
-                        // TODO: dh> provide a default class for pTyp, too. Should be a name and not the ityp_ID though..?!
-                        ?>
+	<!-- =================================== START OF FOOTER =================================== -->
+	<div class="col-md-12 center">
+
+		<div class="evo_container evo_container__footer">
+		<?php
+			// Display container and contents:
+			skin_container( NT_("Footer"), array(
+					// The following params will be used as defaults for widgets included in this container:
+					'block_start'       => '<div class="evo_widget $wi_class$">',
+					'block_end'         => '</div>',
+				) );
+			// Note: Double quotes have been used around "Footer" only for test purposes.
+		?>
+		</div>
+
+		<p>
+			<?php
+				// Display footer text (text can be edited in Blog Settings):
+				$Blog->footer_text( array(
+						'before' => '',
+						'after'  => ' &bull; ',
+					) );
+			?>
 
                         <?php
                         // Display a link to contact the owner of this blog (if owner accepts messages):
@@ -484,12 +484,12 @@ siteskin_include('_site_body_header.inc.php');
                     ));
                     ?>
 
-                </div>
             </div>
-        </div>
-    </div>
+        </footer>
+    </div> <!-- .container -->
+</div> <!-- .main -->
 
-</div>
+
 
 <?php
 // ---------------------------- SITE FOOTER INCLUDED HERE ----------------------------
