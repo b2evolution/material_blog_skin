@@ -163,7 +163,7 @@ $Comment->get_Item();
 	$Comment->date(); echo ', '; $Comment->time( '#short_time' );
         echo '</span>';
         
-        echo '<span class="comment_actions">';
+        echo '<span class="comment_actions color-hover">';
 	$commented_Item = & $Comment->get_Item();
 	$Comment->edit_link( '', '', '#', '#', 'permalink_right', '&amp;', true, rawurlencode( $Comment->get_permanent_url() ) ); /* Link to backoffice for editing */
 	$Comment->delete_link( '', '', '#', '#', 'permalink_right', false, '&amp;', true, false, '#', rawurlencode( $commented_Item->get_permanent_url() ) ); /* Link to backoffice for deleting */

@@ -83,7 +83,7 @@ siteskin_include('_site_body_header.inc.php');
 
         <nav class="row">
             <div class="col-md-12">
-                <ul class="nav circle-svg-a evo_container evo_container__menu">
+                <ul class="nav color-hover circle-svg-a evo_container evo_container__menu">
                     <?php
 // ------------------------- "Menu" CONTAINER EMBEDDED HERE --------------------------
 // Display container and contents:

@@ -65,7 +65,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 	if( ! $Item->is_intro() )
 	{ // Don't display these data for intro posts
 	?>
-	<div class="small text-muted">
+	<div class="small text-muted color-hover">
 	<?php
 		if( $Item->status != 'published' )
 		{
@@ -133,7 +133,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 			) );
 	?>
 
-	<div class="small">
+	<div class="small color-hover">
 		<?php
 			// Link to comments, trackbacks, etc.:
 			$Item->feedback_link( array(
