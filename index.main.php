@@ -419,7 +419,7 @@ siteskin_include('_site_body_header.inc.php');
 <footer class="row">
 
 	<!-- =================================== START OF FOOTER =================================== -->
-	<div class="col-md-12 center">
+	<div class="col-md-12 center content">
 
 		<div class="evo_container evo_container__footer">
 		<?php

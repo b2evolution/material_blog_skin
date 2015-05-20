@@ -143,13 +143,9 @@ textarea,
 button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"],
-.main a {
-    -webkit-transition: all 0.2s ease-in-out;
-    -moz-transition: all 0.2s ease-in-out;
-    -ms-transition: all 0.2s ease-in-out;
-    -o-transition: all 0.2s ease-in-out;
-    transition: all 0.2s ease-in-out; 
+input[type="submit"]
+{
+    
 }
 
 
@@ -160,6 +156,10 @@ input[type="submit"],
 }
 
 .color-hover a:hover {
+    color: @primarycolor!important;
+}
+
+.content a:hover {
     color: @primarycolor!important;
 }
 
@@ -1214,10 +1214,7 @@ body .main .ufld_icon_links {
 
 
         #uploadfile_A1 {
-            width: auto;
-            margin: 0;
             display: inline-block;
-            vertical-align: text-bottom;
         }
         #uploadfile_A1:focus {
             outline: 0;

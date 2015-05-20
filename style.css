@@ -163,23 +163,15 @@ textarea,
   -webkit-font-smoothing: subpixel-antialiased;
   position: relative;
 }
-button,
-input[type="button"],
-input[type="reset"],
-input[type="submit"],
-.main a {
-  -webkit-transition: all 0.2s ease-in-out;
-  -moz-transition: all 0.2s ease-in-out;
-  -ms-transition: all 0.2s ease-in-out;
-  -o-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
 .main a {
   color: #212121;
   text-decoration: none;
   outline: 0;
 }
 .color-hover a:hover {
+  color: #448aff !important;
+}
+.content a:hover {
   color: #448aff !important;
 }
 /* Content Typography */
@@ -1007,10 +999,7 @@ user.anonymous {
   margin: 0.4em 1em 0.4em 0;
 }
 .main .comment_form form #uploadfile_A1 {
-  width: auto;
-  margin: 0;
   display: inline-block;
-  vertical-align: text-bottom;
 }
 .main .comment_form form #uploadfile_A1:focus {
   outline: 0;
