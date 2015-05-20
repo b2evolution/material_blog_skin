@@ -342,6 +342,10 @@ big {
 .jumbotron p {
   font-weight: 400;
 }
+.jumbotron .title {
+  display: inline-block;
+  margin-right: 0.8em;
+}
 .main #styled_content_block img {
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
@@ -1000,6 +1004,8 @@ user.anonymous {
 }
 .main .comment_form form #uploadfile_A1 {
   display: inline-block;
+  font-size: 1em;
+  line-height: 1em;
 }
 .main .comment_form form #uploadfile_A1:focus {
   outline: 0;
