@@ -223,7 +223,9 @@ textarea,
 .content p,
 .content li,
 .content td,
-.content dd {
+.content dd,
+.result_content,
+.search_title {
   color: #666;
 }
 .content cite {
@@ -1552,4 +1554,15 @@ user.anonymous {
   .main .evo_comment .panel-body .evo_comment_footer small .comment_actions a {
     margin: 0 .6em 0 0;
   }
+}
+.extended_search_form .submit {
+  font-size: 18px !important;
+  margin-top: 0em !important;
+  margin-left: 10px !important;
+}
+#bCalendarToday {
+  border: 1px solid #448aff !important;
+  background-color: #448aff !important;
+  color: #fff;
+  border-radius: 2px !important;
 }
