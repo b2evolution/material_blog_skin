@@ -1566,3 +1566,7 @@ user.anonymous {
   color: #fff;
   border-radius: 2px !important;
 }
+.featured_post {
+  border-bottom: none;
+  margin-bottom: 0em;
+}
