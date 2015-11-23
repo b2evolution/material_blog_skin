@@ -1569,4 +1569,21 @@ user.anonymous {
 .featured_post {
   border-bottom: none;
   margin-bottom: 0em;
+  background: #f4f4f4;
+  padding: 20px;
+  border-radius: 2px;
+}
+.featured_post .post_title {
+  display: table;
+}
+.featured_post .post_title .title,
+.featured_post .post_title .btn-group {
+  display: table-cell;
+}
+.featured_post .post_title .btn-group {
+  padding-left: 20px;
+}
+.featured_post .small {
+  margin-bottom: 0.5em;
+  padding-top: 0em;
 }
