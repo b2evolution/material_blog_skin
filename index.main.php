@@ -431,7 +431,7 @@ siteskin_include('_site_body_header.inc.php');
 		?>
 		</div>
 
-		<p>
+		<p class="footer_paragraph">
 			<?php
 				// Display footer text (text can be edited in Blog Settings):
 				$Blog->footer_text( array(

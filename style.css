@@ -1587,3 +1587,18 @@ user.anonymous {
   margin-bottom: 0.5em;
   padding-top: 0em;
 }
+.evo_post_gallery {
+  margin-top: 15px;
+}
+.footer_paragraph {
+  clear: both;
+}
+.search_result_score {
+  margin-top: 5px;
+}
+.search_content_wrap {
+  margin-left: 50px;
+}
+.search_content_wrap .result_content {
+  margin: 15px 0;
+}

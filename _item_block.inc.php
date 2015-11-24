@@ -133,6 +133,10 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 			) );
 	?>
 
+	<?php
+	if( ! $Item->is_intro() )
+	{ // Don't display these data for intro posts
+	?>	
 	<div class="small color-hover">
 		<?php
 			// Link to comments, trackbacks, etc.:
@@ -158,6 +162,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 						) );
 		?>
 	</div>
+	<?php } ?>
 
 	<?php
 		// ------------------ FEEDBACK (COMMENTS/TRACKBACKS) INCLUDED HERE ------------------
