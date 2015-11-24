@@ -2,6 +2,8 @@
 
 This is a skin for b2evolution CMS v6.
 
+Link to skin: http://skins.b2evolution.net/material-blog-skin
+
 ### Front Page
 
 ![disp=front](skinshot_front.jpg)
