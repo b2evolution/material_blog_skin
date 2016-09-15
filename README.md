@@ -21,6 +21,7 @@ Link to skin: http://skins.b2evolution.net/material-blog-skin
 ### Update Log:
 
 ## v1.1.0-stable
+- Implemented LESS modules for different widget layouts
 - Implemented meta-comments engine
 - Fixed bug with comment forms
 - Updated CSS and JS thumbprints for this skin's plugins and libraries
