@@ -15,3 +15,16 @@ Link to skin: http://skins.b2evolution.net/material-blog-skin
 ### Single Post Page
 
 ![disp=single](skinshot_single.jpg)
+
+====
+
+### Update Log:
+
+## v1.1.0-stable
+- Implemented meta-comments engine
+- Fixed bug with comment forms
+- Updated CSS and JS thumbprints for this skin's plugins and libraries
+- Item Single widgets enabled for additional back-office customization on disp=single
+- Modified back-office customization
+- Fixed pagination style issue
+- Additional small skin fixes

@@ -13,7 +13,7 @@
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
 
-global $Item, $Skin;
+global $Item, $Skin, $app_version;
 
 // Default params:
 $params = array_merge( array(
@@ -117,14 +117,48 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 	?>
 
 	<?php
+	if( $disp == 'single' )
+	{
+		?>
+		<div class="evo_container evo_container__item_single">
+		<?php
+		// ------------------------- "Item Single" CONTAINER EMBEDDED HERE --------------------------
+		// Display container contents:
+		skin_container( /* TRANS: Widget container name */ NT_('Item Single'), array(
+			'widget_context' => 'item',	// Signal that we are displaying within an Item
+			// The following (optional) params will be used as defaults for widgets included in this container:
+			// This will enclose each widget in a block:
+			'block_start' => '<div class="$wi_class$">',
+			'block_end' => '</div>',
+			// This will enclose the title of each widget:
+			'block_title_start' => '<h3>',
+			'block_title_end' => '</h3>',
+			// Template params for "Item Tags" widget
+			'widget_item_tags_before'    => '<div class="small">'.T_('Tags').': ',
+			'widget_item_tags_after'     => '</div>',
+			// Params for skin file "_item_content.inc.php"
+			'widget_item_content_params' => $params,
+		) );
+		// ----------------------------- END OF "Item Single" CONTAINER -----------------------------
+		?>
+		</div>
+		<?php
+	}
+	else
+	{
+	// this will create a <section>
 		// ---------------------- POST CONTENT INCLUDED HERE ----------------------
 		skin_include( '_item_content.inc.php', $params );
 		// Note: You can customize the default item content by copying the generic
 		// /skins/_item_content.inc.php file into the current skin folder.
 		// -------------------------- END OF POST CONTENT -------------------------
+	// this will end a </section>
+	}
 	?>
 
 	<?php
+		if( ! $Item->is_intro() )
+		{ // Don't display these data for intro posts
 		// List all tags attached to this post:
 		$Item->tags( array(
 				'before'    => '<div class="small">'.T_('Tags').': ',
@@ -132,11 +166,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 				'separator' => ', ',
 			) );
 	?>
-
-	<?php
-	if( ! $Item->is_intro() )
-	{ // Don't display these data for intro posts
-	?>	
+	
 	<div class="small color-hover">
 		<?php
 			// Link to comments, trackbacks, etc.:
@@ -174,6 +204,27 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 		// Note: You can customize the default item feedback by copying the generic
 		// /skins/_item_feedback.inc.php file into the current skin folder.
 		// ---------------------- END OF FEEDBACK (COMMENTS/TRACKBACKS) ---------------------
+	?>
+	
+	<?php
+	if( evo_version_compare( $app_version, '6.7' ) >= 0 )
+	{	// We are running at least b2evo 6.7, so we can include this file:
+		// ------------------ WORKFLOW PROPERTIES INCLUDED HERE ------------------
+		skin_include( '_item_workflow.inc.php' );
+		// ---------------------- END OF WORKFLOW PROPERTIES ---------------------
+	}
+	?>
+
+	<?php
+	if( evo_version_compare( $app_version, '6.7' ) >= 0 )
+	{	// We are running at least b2evo 6.7, so we can include this file:
+		// ------------------ META COMMENTS INCLUDED HERE ------------------
+		skin_include( '_item_meta_comments.inc.php', array(
+				'comment_start'         => '<article class="evo_comment evo_comment__meta panel panel-default">',
+				'comment_end'           => '</article>',
+			) );
+		// ---------------------- END OF META COMMENTS ---------------------
+	}
 	?>
 
 	<?php

@@ -6,7 +6,7 @@
  *
  * b2evolution - {@link http://b2evolution.net/}
  * Released under GNU GPL License - {@link http://b2evolution.net/about/gnu-gpl-license}
- * @copyright (c)2003-2015 by Francois Planque - {@link http://fplanque.com/}
+ * @copyright (c)2003-2016 by Francois Planque - {@link http://fplanque.com/}
  *
  * @package evoskins
  */
@@ -44,7 +44,7 @@ $params = array_merge( array(
 		'before_comment_form'  => '',
 		'after_comment_form'   => '</div></div>',
 		'form_comment_redirect_to' => $Item->get_feedback_url( $disp == 'feedback-popup', '&' ),
-		'comment_image_size'       => 'fit-400x320',
+		'comment_image_size'       => 'fit-1280x720',
 		'comment_attach_info'      => get_icon( 'help', 'imgtag', array(
 				'data-toggle'    => 'tooltip',
 				'data-placement' => 'bottom',
@@ -53,6 +53,7 @@ $params = array_merge( array(
 						'block_after'     => '',
 						'block_separator' => '<br /><br />' ) ) )
 			) ),
+		'comment_mode'         => '', // Can be 'quote' from GET request
 	), $params );
 
 $comment_reply_ID = param( 'reply_ID', 'integer', 0 );
@@ -61,6 +62,9 @@ $email_is_detected = false; // Used when comment contains an email strings
 
 // Consider comment attachments list empty
 $comment_attachments = '';
+
+// Default renderers:
+$comment_renderers = array( 'default' );
 
 /*
  * Comment form:
@@ -123,6 +127,8 @@ if( $params['disp_comment_form'] && $Item->can_comment( $params['before_comment_
 			$comment_author = $Comment->author;
 			$comment_author_email = $Comment->author_email;
 			$comment_author_url = $Comment->author_url;
+			// Get what renderer checkboxes were selected on form:
+			$comment_renderers = explode( '.', $Comment->get( 'renderers' ) );
 
 			// Display error messages again after preview of comment
 			global $Messages;
@@ -168,6 +174,57 @@ if( $params['disp_comment_form'] && $Item->can_comment( $params['before_comment_
 			// checked_attachments contains all attachment file IDs which checkbox was checked in
 			$checked_attachments = $Comment->checked_attachments;
 		}
+
+		if( $params['comment_mode'] == 'quote' )
+		{	// These params go from ajax form loading, Used to reply with quote
+			set_param( 'mode', $params['comment_mode'] );
+			set_param( 'qc', $params['comment_qc'] );
+			set_param( 'qp', $params['comment_qp'] );
+			set_param( $dummy_fields[ 'content' ], $params[ $dummy_fields[ 'content' ] ] );
+		}
+
+		$mode = param( 'mode', 'string' );
+		if( $mode == 'quote' )
+		{ // Quote for comment/post
+			$comment_content = param( $dummy_fields[ 'content' ], 'html' );
+			$quoted_comment_ID = param( 'qc', 'integer', 0 );
+			$quoted_post_ID = param( 'qp', 'integer', 0 );
+			if( !empty( $quoted_comment_ID ) )
+			{
+				$CommentCache = & get_CommentCache();
+				$quoted_Comment = & $CommentCache->get_by_ID( $quoted_comment_ID, false );
+				$quoted_Item = $quoted_Comment->get_Item();
+				if( $quoted_User = $quoted_Comment->get_author_User() )
+				{ // User is registered
+					$quoted_login = $quoted_User->login;
+				}
+				else
+				{ // Anonymous user
+					$quoted_login = $quoted_Comment->get_author_name();
+				}
+				$quoted_content = $quoted_Comment->get( 'content' );
+				$quoted_ID = 'c'.$quoted_Comment->ID;
+			}
+			else if( !empty( $quoted_post_ID ) )
+			{
+				$ItemCache = & get_ItemCache();
+				$quoted_Item = & $ItemCache->get_by_ID( $quoted_post_ID, false );
+				$quoted_login = $quoted_Item->get_creator_login();
+				$quoted_content = $quoted_Item->get( 'content' );
+				$quoted_ID = 'p'.$quoted_Item->ID;
+			}
+
+			if( !empty( $quoted_Item ) )
+			{	// Format content for editing, if we were not already in editing...
+				$comment_title = '';
+				$comment_content .= '[quote=@'.$quoted_login.'#'.$quoted_ID.']'.strip_tags($quoted_content).'[/quote]';
+
+				$Plugins_admin = & get_Plugins_admin();
+				$quoted_Item->load_Blog();
+				$plugins_params = array( 'object_type' => 'Comment', 'object_Blog' => & $quoted_Item->Blog );
+				$Plugins_admin->unfilter_contents( $comment_title /* by ref */, $comment_content /* by ref */, $quoted_Item->get_renderers_validated(), $plugins_params );
+			}
+		}
 	}
 
 	if( ( !empty( $PageCache ) ) && ( $PageCache->is_collecting ) )
@@ -204,11 +261,11 @@ function validateCommentForm(form)
 /* ]]> *
 </script>';*/
 
-	$Form = new Form( $samedomain_htsrv_url.'comment_post.php', 'evo_comment_form_id_'.$Item->ID, 'post', NULL, 'multipart/form-data' );
+	$Form = new Form( get_htsrv_url().'comment_post.php', 'evo_comment_form_id_'.$Item->ID, 'post', NULL, 'multipart/form-data' );
 
 	$Form->switch_template_parts( $params['form_params'] );
 
-	$Form->begin_form( 'evo_form', '', array( 'target' => '_self'/*, 'onsubmit' => 'return validateCommentForm(this);'*/ ) );
+	$Form->begin_form( 'evo_form evo_form__comment', '', array( 'target' => '_self'/*, 'onsubmit' => 'return validateCommentForm(this);'*/ ) );
 
 	// TODO: dh> a plugin hook would be useful here to add something to the top of the Form.
 	//           Actually, the best would be, if the $Form object could be changed by a plugin
@@ -227,7 +284,7 @@ function validateCommentForm(form)
 			// Make sure we get back to the right page (on the right domain)
 			// fp> TODO: check if we can use the permalink instead but we must check that application wide,
 			// that is to say: check with the comments in a pop-up etc...
-			// url_rel_to_same_host(regenerate_url( '', '', $Blog->get('blogurl'), '&' ), $htsrv_url)
+			// url_rel_to_same_host(regenerate_url( '', '', $Blog->get('blogurl'), '&' ), get_htsrv_url())
 			// fp> what we need is a regenerate_url that will work in permalinks
 			// fp> below is a simpler approach:
 			$params['form_comment_redirect_to']
@@ -285,8 +342,7 @@ function validateCommentForm(form)
 	$Form->textarea_input( $dummy_fields[ 'content' ], $comment_content, $params['textarea_lines'], $params['form_comment_text'], array(
 			'note' => $note,
 			'cols' => 38,
-			'class' => 'bComment autocomplete_usernames',
-			'display_fix_pixel' => false,
+			'class' => 'autocomplete_usernames'
 		) );
 	$Form->inputstart = $form_inputstart;
 
@@ -356,13 +412,10 @@ function validateCommentForm(form)
 	}
 
 	// Display renderers
-	$comment_renderer_checkboxes = $Plugins->get_renderer_checkboxes( array( 'default' ), array( 'Blog' => & $Blog, 'setting_name' => 'coll_apply_comment_rendering' ) );
+	$comment_renderer_checkboxes = $Plugins->get_renderer_checkboxes( $comment_renderers, array( 'Blog' => & $Blog, 'setting_name' => 'coll_apply_comment_rendering' ) );
 	if( !empty( $comment_renderer_checkboxes ) )
 	{
-		$Form->begin_fieldset();
-		echo '<div class="label">'.T_('Text Renderers').':</div>';
-		echo '<div class="input">'.$comment_renderer_checkboxes.'</div>';
-		$Form->end_fieldset();
+		$Form->info( T_('Text Renderers'), $comment_renderer_checkboxes );
 	}
 
 	$Plugins->trigger_event( 'DisplayCommentFormFieldset', array( 'Form' => & $Form, 'Item' => & $Item ) );
@@ -371,8 +424,8 @@ function validateCommentForm(form)
 		echo $Form->buttonsstart;
 
 		$preview_text = ( $Item->can_attach() ) ? T_('Preview/Add file') : T_('Preview');
+		$Form->button_input( array( 'name' => 'submit_comment_post_'.$Item->ID.'[preview]', 'class' => 'preview btn-info', 'value' => $preview_text, 'tabindex' => 9 ) );
 		$Form->button_input( array( 'name' => 'submit_comment_post_'.$Item->ID.'[save]', 'class' => 'submit SaveButton', 'value' => $params['form_submit_text'], 'tabindex' => 10 ) );
-		$Form->button_input( array( 'name' => 'submit_comment_post_'.$Item->ID.'[preview]', 'class' => 'preview', 'value' => $preview_text, 'tabindex' => 9 ) );
 
 		$Plugins->trigger_event( 'DisplayCommentFormButton', array( 'Form' => & $Form, 'Item' => & $Item ) );
 

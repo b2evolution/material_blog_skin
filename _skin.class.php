@@ -17,7 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class material_blog_Skin extends Skin
 {
-	var $version = '1.0';
+	var $version = '1.1.0';
 	/**
 	 * Get default name for the skin.
 	 * Note: the admin can customize it.
@@ -60,7 +60,7 @@ class material_blog_Skin extends Skin
 		$r = array_merge( array(
 				'layout' => array(
 					'label' => T_('Layout'),
-					'note' => '',
+					'note' => T_('Select skin layout.'),
 					'defaultvalue' => 'right_sidebar',
 					'options' => array(
 							'single_column' => T_('Single column'),

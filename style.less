@@ -1070,6 +1070,22 @@ body .main .ufld_icon_links {
     margin: 2em 0em 0.6em;
     font-weight: 300;
     font-size: 1.7em;
+	display: inline;
+}
+
+.main .evo_comment__meta_info {
+	display: inline;
+	padding-top: 5px;
+}
+
+.comment_toolbars {
+	.btn-toolbar-title {
+		margin-top: 15px;
+	}
+	input[type="button"] {
+		margin-top: 0;
+		padding: 12px 12px;
+	}
 }
 
 .main .evo_comment {
@@ -1102,6 +1118,7 @@ body .main .ufld_icon_links {
         margin-top: 1em;
         a {
             color: @primarycolor;
+			background-color: transparent;
         }
 
 
@@ -2023,12 +2040,33 @@ body .main .ufld_icon_links {
 	clear: both;
 }
 
-.search_result_score {
-	margin-top: 5px;
-}
-.search_content_wrap {
-	margin-left: 50px;
-	.result_content {
-		margin: 15px 0;
+.search_result {
+	padding: 0 0 45px;
+	
+	.search_result_score {
+		float: none;
+		padding-bottom: 5px;
+		padding: 10px 18px;
+		line-height: 1.1em;
+		text-decoration: none;
+		background-color: #f4f4f4;
+		margin-right: 8px;
+		border-radius: 2px;
+		border: 0;
+		font-size: 1.1em;
+		color: #212121;
+		width: auto;
+		display: inline-block;
+	}
+
+	.search_content_wrap {
+		margin-left: 0;
+		.result_content {
+			margin: 0;
+		}
+		.search_info img {
+			vertical-align: middle;
+			border-radius: 50%;
+		}
 	}
 }

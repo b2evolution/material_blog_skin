@@ -6,11 +6,14 @@
  *
  * b2evolution - {@link http://b2evolution.net/}
  * Released under GNU GPL License - {@link http://b2evolution.net/about/gnu-gpl-license}
- * @copyright (c)2003-2015 by Francois Planque - {@link http://fplanque.com/}
+z * @copyright (c)2003-2016 by Francois Planque - {@link http://fplanque.com/}
  *
  * @package evoskins
  */
 if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.' );
+
+
+global $comment_template_counter;
 
 // Default params:
 $params = array_merge( array(
@@ -39,6 +42,11 @@ $params = array_merge( array(
 		'Comment'               => NULL, // This object MUST be passed as a param!
 	), $params );
 
+if( ! isset( $comment_template_counter ) )
+{	// Initialize global comment counter:
+	$comment_template_counter = isset( $params['comment_number'] ) ? $params['comment_number'] : 1;
+}
+
 /**
  * @var Comment
  */
@@ -47,11 +55,9 @@ $Comment = & $params['Comment'];
 // Load comment's Item object:
 $Comment->get_Item();
 
-?>
-<!-- ========== START of a COMMENT/TB/PB ========== -->
-<?php
-	$Comment->anchor();
-	echo $params['comment_start'];
+
+$Comment->anchor();
+echo $params['comment_start'];
 
 	// Status
 	if( $Comment->status != 'published' )
@@ -74,6 +80,12 @@ $Comment->get_Item();
 	switch( $Comment->get( 'type' ) )
 	{
 		case 'comment': // Display a comment:
+		case 'meta': // Display a meta comment:
+			if( $Comment->is_meta() )
+			{	// Meta comment:
+				echo '<span class="badge badge-info">'.$comment_template_counter.'</span> ';
+			}
+			
 			if( empty($Comment->ID) )
 			{	// PREVIEW comment
 				echo '<span class="evo_comment_type_preview">'.T_('PREVIEW Comment from:').'</span> ';
