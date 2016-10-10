@@ -153,18 +153,17 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 		// /skins/_item_content.inc.php file into the current skin folder.
 		// -------------------------- END OF POST CONTENT -------------------------
 	// this will end a </section>
-	}
-	?>
+	
 
-	<?php
 		if( ! $Item->is_intro() )
 		{ // Don't display these data for intro posts
 		// List all tags attached to this post:
 		$Item->tags( array(
-				'before'    => '<div class="small">'.T_('Tags').': ',
-				'after'     => '</div>',
-				'separator' => ', ',
-			) );
+			'before'    => '<div class="small">'.T_('Tags').': ',
+			'after'     => '</div>',
+			'separator' => ', ',
+		) );
+	}
 	?>
 	
 	<div class="small color-hover">
