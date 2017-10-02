@@ -17,7 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class material_blog_Skin extends Skin
 {
-	var $version = '1.1.0';
+	var $version = '1.1.1';
 	/**
 	 * Get default name for the skin.
 	 * Note: the admin can customize it.
@@ -46,6 +46,45 @@ class material_blog_Skin extends Skin
 	function get_api_version()
 	{
 		return 6;
+	}
+
+
+	/**
+	 * Get supported collection kinds.
+	 *
+	 * This should be overloaded in skins.
+	 *
+	 * For each kind the answer could be:
+	 * - 'yes' : this skin does support that collection kind (the result will be was is expected)
+	 * - 'partial' : this skin is not a primary choice for this collection kind (but still produces an output that makes sense)
+	 * - 'maybe' : this skin has not been tested with this collection kind
+	 * - 'no' : this skin does not support that collection kind (the result would not be what is expected)
+	 * There may be more possible answers in the future...
+	 */
+	public function get_supported_coll_kinds()
+	{
+		$supported_kinds = array(
+				'main' => 'maybe',
+				'std' => 'yes',		// Blog
+				'photo' => 'maybe',
+				'forum' => 'no',
+				'manual' => 'no',
+				'group' => 'no',  // Tracker
+				// Any kind that is not listed should be considered as "maybe" supported
+			);
+
+		return $supported_kinds;
+	}
+
+
+	/*
+	 * What CSS framework does has this skin been designed with?
+	 *
+	 * This may impact default markup returned by Skin::get_template() for example
+	 */
+	function get_css_framework()
+	{
+		return 'bootstrap';
 	}
 
 
