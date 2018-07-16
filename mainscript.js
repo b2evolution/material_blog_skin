@@ -4,7 +4,7 @@
     create_svg('.col-md-12', '.circle-svg-a a');
 
     create_svg('.panel', '.circle-svg-a a');
-    
+
     create_svg('.panel', '.circle-svg-span span');
 
 
@@ -13,8 +13,6 @@
         /* Create circle animation from circle-svg-* class */
 
         $(c1).on('click', c2, function(c) {
-
-        console.log('click:');
 
             var box = $(this);
 
@@ -50,20 +48,20 @@
         });
 
   }
-  
-  
+
+
      /* Social Icons Setup */
-    
+
     $('.widget_core_user_links a').each(function(){
-        
+
        var mthis = $(this);
-       
+
        var class_attr = $(mthis).attr('class');
-       
+
        $(mthis).children('span').addClass(class_attr);
-        
+
     });
-    
+
 
     var panel_id = 0;
 
@@ -87,11 +85,11 @@
         }
 
 
-        $(this).find('.panel-toggle').attr('data-target', '.pcollapse-' + panel_id);
+        $(this).find('.panel-toggle').attr('data-target', '#pcollapse-' + panel_id);
 
         $(this).find('.panel-toggle').addClass(' collapsed');
 
-        $(this).find('.panel-collapse').addClass(' pcollapse-' + panel_id);
+        $(this).find('.panel-collapse').attr( 'id', 'pcollapse-' + panel_id);
 
 
         if ($(this).find('.panel-heading').length > 0) {

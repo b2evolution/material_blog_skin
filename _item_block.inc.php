@@ -77,7 +77,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 			'after'     => '</span>',
 				'text' => '#icon#',
 			) );
-               
+
 		// We want to display the post time:
 		$Item->issue_time( array(
 				'before'      => '<span class="time"><i class="fa fa-clock-o"></i>',
@@ -85,7 +85,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 				'time_format' => 'M j, Y',
 			) );
 
-               
+
 
 		// Author
 		$Item->author( array(
@@ -153,7 +153,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 		// /skins/_item_content.inc.php file into the current skin folder.
 		// -------------------------- END OF POST CONTENT -------------------------
 	// this will end a </section>
-	
+
 
 		if( ! $Item->is_intro() )
 		{ // Don't display these data for intro posts
@@ -165,7 +165,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 		) );
 	}
 	?>
-	
+
 	<div class="small color-hover">
 		<?php
 			// Link to comments, trackbacks, etc.:
@@ -204,7 +204,7 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 		// /skins/_item_feedback.inc.php file into the current skin folder.
 		// ---------------------- END OF FEEDBACK (COMMENTS/TRACKBACKS) ---------------------
 	?>
-	
+
 	<?php
 	if( evo_version_compare( $app_version, '6.7' ) >= 0 )
 	{	// We are running at least b2evo 6.7, so we can include this file:
