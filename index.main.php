@@ -104,7 +104,7 @@ siteskin_include('_site_body_header.inc.php');
 
         <!-- =================================== START OF MAIN AREA =================================== -->
         <div class="row">
-            <div class="content <?php
+            <div class="content evo_content_block <?php
             echo ( $Skin->get_setting('layout') == 'single_column' ? 'col-md-12' : 'col-md-9' );
             echo ( $Skin->get_setting('layout') == 'left_sidebar' ? ' pull-right' : '' );
             ?>">
@@ -282,7 +282,7 @@ siteskin_include('_site_body_header.inc.php');
                     'search_input_after' => '',
                     'search_submit_before' => '<span class="input-group-btn">',
                     'search_submit_after' => '</span></div>',
-                    
+
                      // Comment template
                     'comment_start' => '<div class="evo_comment panel panel-default">',
                     'comment_end' => '</div>',
@@ -306,7 +306,7 @@ siteskin_include('_site_body_header.inc.php');
                             'block_after' => '',
                             'block_separator' => '<br /><br />')))
                     )),
-                    
+
                     // Front page
                     'featured_intro_before' => '<div class="jumbotron">',
                     'featured_intro_after' => '</div>',
