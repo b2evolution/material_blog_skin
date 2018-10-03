@@ -17,7 +17,7 @@ if( !defined('EVO_MAIN_INIT') ) die( 'Please, do not access this page directly.'
  */
 class material_blog_Skin extends Skin
 {
-	var $version = '7.1.2';
+	var $version = '7.1.3';
 	/**
 	 * Get default name for the skin.
 	 * Note: the admin can customize it.
