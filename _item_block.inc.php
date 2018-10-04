@@ -89,6 +89,29 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 				'widget_item_visibility_badge_template' => '<div class="floatright">
 						<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
 						<span>$status_title$</span></span></div>',
+				// Template params for "Item Info Line" widget:
+				'widget_item_info_line_before' => '<div class="small text-muted color-hover">',
+				'widget_item_info_line_after'  => '</div>',
+				'widget_item_info_line_params' => array(
+						'before_flag'         => '<span>',
+						'after_flag'          => '</span>',
+						'before_permalink'    => '<span>',
+						'after_permalink'     => '</span>',
+						'before_author'       => '<span class="author"><i class="fa fa-user"></i>',
+						'after_author'        => '</span>',
+						'before_post_time'    => '<span class="time"><i class="fa fa-clock-o"></i>',
+						'after_post_time'     => '</span>',
+						'before_categories'   => '<span class="category"><i class="fa fa-archive"></i> ',
+						'after_categories'    => '</span>',
+						'before_last_touched' => '<span class="time"><i class="fa fa-clock-o"></i>'.T_('Last touched').': ',
+						'after_last_touched'  => '</span>',
+						'before_last_updated' => '<span class="time"><i class="fa fa-clock-o"></i>'.T_('Contents updated').': ',
+						'after_last_updated'  => '</span>',
+						'before_edit_link'    => '<span class="edit"><i class="fa fa-pencil"></i> ',
+						'after_edit_link'     => '</span>',
+						'edit_link_text'      => T_('Edit'),
+						'format'              => '$flag$$permalink$$post_time$$author$$categories$$last_touched$$last_updated$$edit_link$',
+					),
 			) );
 			// ----------------------------- END OF "Item in List" CONTAINER -----------------------------
 		}
@@ -126,51 +149,34 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 				'widget_item_visibility_badge_template' => '<div class="floatright">
 						<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
 						<span>$status_title$</span></span></div>',
+				// Template params for "Item Info Line" widget:
+				'widget_item_info_line_before' => '<div class="small text-muted color-hover">',
+				'widget_item_info_line_after'  => '</div>',
+				'widget_item_info_line_params' => array(
+						'before_flag'         => '<span>',
+						'after_flag'          => '</span>',
+						'before_permalink'    => '<span>',
+						'after_permalink'     => '</span>',
+						'before_author'       => '<span class="author"><i class="fa fa-user"></i>',
+						'after_author'        => '</span>',
+						'before_post_time'    => '<span class="time"><i class="fa fa-clock-o"></i>',
+						'after_post_time'     => '</span>',
+						'before_categories'   => '<span class="category"><i class="fa fa-archive"></i> ',
+						'after_categories'    => '</span>',
+						'before_last_touched' => '<span class="time"><i class="fa fa-clock-o"></i>'.T_('Last touched').': ',
+						'after_last_touched'  => '</span>',
+						'before_last_updated' => '<span class="time"><i class="fa fa-clock-o"></i>'.T_('Contents updated').': ',
+						'after_last_updated'  => '</span>',
+						'before_edit_link'    => '<span class="edit"><i class="fa fa-pencil"></i> ',
+						'after_edit_link'     => '</span>',
+						'edit_link_text'      => T_('Edit'),
+						'format'              => '$flag$$permalink$$post_time$$author$$categories$$last_touched$$last_updated$$edit_link$',
+					),
 			) );
 			// ----------------------------- END OF "Item Single - Header" CONTAINER -----------------------------
 		}
 	?>
-		<div class="small text-muted color-hover">
-			<?php
-			// Permalink:
-			$Item->permanent_link( array(
-					'before' => '<span>',
-					'after'  => '</span>',
-					'text'   => '#icon#',
-				) );
 
-			// We want to display the post time:
-			$Item->issue_time( array(
-					'before'      => '<span class="time"><i class="fa fa-clock-o"></i>',
-					'after'       => '</span>',
-					'time_format' => 'M j, Y',
-				) );
-
-			// Author
-			$Item->author( array(
-				'before'    => '<span class="author"><i class="fa fa-user"></i>',
-				'after'     => '</span>',
-				'link_text' => $params['author_link_text'],
-			) );
-
-			// Categories
-			$Item->categories( array(
-				'before'          => '<span class="category"><i class="fa fa-archive"></i> ',
-				'after'           => '</span>',
-				'include_main'    => true,
-				'include_other'   => true,
-				'include_external'=> true,
-				'link_categories' => true,
-			) );
-
-			// Link for editing
-			$Item->edit_link( array(
-				'before' => '<span class="edit"><i class="fa fa-pencil"></i> ',
-				'after'  => '</span>',
-				'text'   => 'Edit',
-			) );
-			?>
-		</div>
 	<?php
 	}
 	?>
