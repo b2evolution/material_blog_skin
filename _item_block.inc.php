@@ -85,10 +85,12 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 						'after'  => '</h2>',
 					),
 				// Item Visibility Badge widge template
-				'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
-				'widget_item_visibility_badge_template' => '<div class="floatright">
-						<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
-						<span>$status_title$</span></span></div>',
+				'widget_item_visibility_badge_display' => ( ! $Item->is_intro() && $Item->status != 'published' ),
+				'widget_item_visibility_badge_params'  => array(
+						'template' => '<div class="floatright">
+								<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
+								<span>$status_title$</span></span></div>',
+					),
 				// Template params for "Item Info Line" widget:
 				'widget_item_info_line_before' => '<div class="small text-muted color-hover">',
 				'widget_item_info_line_after'  => '</div>',
@@ -145,10 +147,12 @@ echo '<div id="styled_content_block">'; // Beginning of post display
 						'next_end' => '</li>',
 					),
 				// Item Visibility Badge widge template
-				'widget_item_visibility_badge_display'  => ( ! $Item->is_intro() && $Item->status != 'published' ),
-				'widget_item_visibility_badge_template' => '<div class="floatright">
-						<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
-						<span>$status_title$</span></span></div>',
+				'widget_item_visibility_badge_display' => ( ! $Item->is_intro() && $Item->status != 'published' ),
+				'widget_item_visibility_badge_params'  => array(
+						'template' => '<div class="floatright">
+								<span class="note status_$status$" data-toggle="tooltip" data-placement="top" title="$tooltip_title$">
+								<span>$status_title$</span></span></div>',
+					),
 				// Template params for "Item Info Line" widget:
 				'widget_item_info_line_before' => '<div class="small text-muted color-hover">',
 				'widget_item_info_line_after'  => '</div>',
